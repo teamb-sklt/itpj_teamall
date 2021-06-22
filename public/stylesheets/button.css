@@ -7,18 +7,21 @@
 .date_box {
 	position:relative;
   margin: 5px auto;
-  width:340px;
+  width: 360px;
 	height: 40px;
+  /* background: #eeeeee; */
 }
 
 .b_box {
   margin: 0 auto;
   height: 40px;
-  width: 200px;
+  width: 230px;
+  /* background: #eeeeee; */
+
 }
 
 b {
-  margin: 6px 4px -1px 4px;
+  margin: 15px;
   color: #78aa00;
   font-size: 30px;
   font-weight: bold;

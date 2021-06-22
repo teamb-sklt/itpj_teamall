@@ -63,7 +63,7 @@ router.get('/', async function(req, res, next) {
 
   client.end()
   let opt={
-    title:'経費リマインド',
+    title:'交通費リマインド',
     shain:shain,
     rireki:rireki,
     year:year,
@@ -116,7 +116,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'交通費リマインド',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -173,7 +173,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'交通費リマインド',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -230,7 +230,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'交通費リマインド',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -280,7 +280,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'交通費リマインド',
       shain:shain,
       rireki:rireki,
       year:year,

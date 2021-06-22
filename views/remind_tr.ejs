@@ -22,11 +22,11 @@
       <% if(rireki[i].emp_no===shain[i].emp_no){ %>
         <table>
         <tr>
-        <th>リマインド</th>
-        <th>ステータス</th>
-        <th>社員番号</th>
-        <th>社員名</th>
-        <th>メールアドレス</th>
+          <th>リマインド</th>
+          <th>ステータス</th>
+          <th>社員番号</th>
+          <th>社員名</th>
+          <th>メールアドレス</th>
         </tr>
 
       <tr>
@@ -36,9 +36,9 @@
         <td><%- shain[i].emp_name %></td>
         <td><%- shain[i].emp_mail %></td> 
       </tr>
-  </table>
+    </table>
   
-    <table>
+  <table>
     <tr>
       <th>月</th>
       <th>日</th>
@@ -128,6 +128,7 @@
 <input type="button" onClick="uncheckAll()" value="チェックを全解除" >   
 <p id="re"></p>      
 </div> 
+
 <!-- モーダル・ダイアログ -->
 <div class="modal" id="sampleModal" tabindex="-1">
 <div class="modal-dialog modal-lg">
