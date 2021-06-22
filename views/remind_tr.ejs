@@ -1,0 +1,228 @@
+<%- include('partials/header3')%>
+
+<head>
+  <title><%-title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+
+  <body>
+   <!-- naviを挿入予定 -->
+   <form action="/remind_tr" method="post">
+    <input type="hidden" name="year" value="<%- year %>">
+    <input type="hidden" name="month" value="<%- month %>">
+    <input type="hidden" name="status" value="1=1">
+    <input type="hidden" name="employee" value="1=1">
+    <button name="last" value="-1">◀</button>
+    <h1><%- year %>年<%- month %>月分</h1>
+    <button name="next" value="+1">▶</button> 
+  </form>
+  <h1>交通費リマインド画面</h1>
+    <!-- <h2>経費</h2> -->
+    <h2><a href="/remind_ex">経費</a></h2>
+    <h2><a href="/remind_tr">交通費</a></h2>
+    <form action="/remind_tr" method="post">
+      <input type="hidden" name="year" value="<%- year %>">
+      <input type="hidden" name="month" value="<%- month %>">
+    </form>
+
+    <form action="/remind_tr/post" method="post">
+      <% var jn; %> 
+      <% if(rireki[0]==null){ %>
+        <p>該当データはありません</p>
+      <% }else{ %> 
+      <% for(var i=0;i<shain.length;i++){ %> 
+        <% if(rireki[i].emp_no===shain[i].emp_no){ %>
+          <table>
+          <tr>
+          <th>リマインド</th>
+          <th>ステータス</th>
+          <th>社員番号</th>
+          <th>社員名</th>
+          <th>メールアドレス</th>
+          </tr>
+
+        <tr>
+          <td><input type="checkbox" class="item" name="checks" value= "<%= shain[i].emp_mail %>" ></td>
+          <td>経費保存</td>
+          <td><%- shain[i].emp_no %></td>
+          <td><%- shain[i].emp_name %></td>
+          <td><%- shain[i].emp_mail %></td> 
+        </tr>
+    </table>
+    
+<!--     <table>
+      <tr>
+        <th>月</th>
+        <th>日</th>
+        <th>from</th>
+        <th>via</th>
+        <th>to</th>
+        <th>交通手段</th>
+        <th>単価</th>
+        <th>回数</th>
+        <th>小計</th>
+        <th>立替</th>
+        <th>Job.c</th>
+        <th>refNo</th>
+        <th>ステータス</th>
+        <th>コメント</th>
+      </tr>
+    </table> -->
+        <% jn=0; %> 
+        <% for(var j=0;j<rireki.length;j++){ %>
+          <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
+            <% jn=rireki[j].job_no; %> 
+            <p><%- rireki[j].job_no %></p>
+          <% for(var k=0;k<rireki.length;k++){ %>
+            <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no&&rireki[k].status=="00"){ %>
+              <table class="info">
+                  <tr>
+                  <td><%- rireki[k].month %></td>
+                  <td><%- rireki[k].day %></td>
+                  <td><%- rireki[k].trans_from %></td>
+                  <td><%- rireki[k].trans_waypoint %></td>
+                  <td><%- rireki[k].trans_to %></td>
+                  <%const shudan = rireki[k].trans_type;
+                  //console.log(shudan);
+                      function hoge(){
+                        if (shudan === "1") {
+                          return("電車");
+                        } else if (shudan === "2") {
+                          return("タクシー");
+                        } else if (version === "3") 
+                          return("バス");
+                        }
+                        var type = hoge();
+                        //console.log(type);
+                        %>
+                  <td><%- type %></td>
+                  <td><%- rireki[k].amount %></td>
+                  <td><%- rireki[k].count %></td>
+                  <td><%- rireki[k].amount*rireki[k].count %></td>
+                  <td><input type="checkbox" name="tatekae" id="tatekae"></td>
+                  <td><input type="checkbox" name="jobc" id="jobc"></td>
+                  <td><%- rireki[k].remarks %></td>
+                  <td><%- rireki[k].ref_no %></td>
+                  <td>未申請</td>
+                  <td><%- rireki[k].remarks %></td>
+                  <!-- <td>コメント<input type="text" name="comment" id="comment"></td>  -->
+                  <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
+                  <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
+                  <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
+                  <input type="hidden" name="branch_no" value="<%- rireki[k].branch_no %>">  
+                </tr>
+              </table>  
+            <% } %>  
+          <% } %> 
+          <% } %>  
+        <% } %>  
+      <% } %> 
+      <% } %> 
+      <% } %> 
+
+<!-- 
+    console.log(shudan);
+    function hoge(){
+      if (shudan === "1") {
+        return("電車");
+      } else if (shudan === "2") {
+        return("タクシー");
+      } else if (version === "3") 
+        return("バス");
+      }
+      var type = hoge();
+      console.log(type);
+      %>
+ -->
+ <div class="container">
+  <input type="button" data-toggle="modal" data-target="#sampleModal" data-watasu="XXX@skylight.co.jp" id="get_values" value="リマインド文面作成" >
+  <input type="button" onClick="checkAll()" value="チェックを全選択" >
+  <input type="button" onClick="uncheckAll()" value="チェックを全解除" >   
+  <p id="re"></p>      
+</div> 
+<!-- モーダル・ダイアログ -->
+<div class="modal" id="sampleModal" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+  <h4 class="modal-title">送信文面</h4>
+</div>
+<div class="modal-body">    
+  <!-- <span id="morau"></span><input type="hidden"><br> -->
+  <!-- <input type="text" id="food" value=""> -->
+  <textarea name=textarea  id="food" rows=”10″ cols=”200″ wrap=”hard” >        
+各位お疲れさまです。
+経理の●●です。
+
+●月分の交通費精算に「未申請」のデータがあるようです。
+・必要なレコードは申請
+・不要なレコードは削除の対応をお願いします。
+
+ご確認のほどどうぞよろしくお願いいたします。
+●●
+  </textarea>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">戻る</button>
+  <button type="submit" id="btn1" class="btn btn-primary">送信</button>
+  </form>
+</div>
+</div>
+</div>
+</div>   
+<script>
+  const checkbox1 = document.getElementsByName("checks")
+
+function checkAll() {
+for(i = 0; i < checkbox1.length; i++) {
+checkbox1[i].checked = true
+}
+}
+
+const checkbox2 = document.getElementsByName("checks")
+function uncheckAll() {
+for(i = 0; i < checkbox2.length; i++) {
+checkbox2[i].checked = false
+}
+}
+
+$('#btn1').on('click', function() {
+var vals = []; // 配列を定義
+$('input[name="checks"]:checked').each(function() {
+vals.push( $(this).val() ); // 配列に値を追加
+});
+
+console.log(vals);
+});
+
+$('#sampleModal').on('show.bs.modal', function (event) {
+//モーダルを開いたボタンを取得
+var button = $(event.relatedTarget);
+//data-watasuの値取得
+var watasuVal = button.data('watasu');
+//モーダルを取得
+var modal = $(this);
+//受け取った値をspanタグのとこに表示
+modal.find('.modal-body span#morau').text('to  '+watasuVal);
+});
+
+// モーダルの中の「送信」を押した時の処理
+$("#btn1").on('click', function() {
+$('#sampleModal').modal('hide');
+var foodVal = $('#food').val();
+//$('#re').text(foodVal);
+console.log(foodVal)
+});
+
+jQuery(function($){
+$('input:checkbox').click(function() {
+$(this).closest('.info tr').find('input:checkbox').not(this).prop('checked', false);
+});
+});
+</script>
+
+<%- include('partials/footer')%>
