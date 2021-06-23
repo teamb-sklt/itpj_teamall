@@ -10,7 +10,7 @@ const dbpassword=process.env.PASSWORD;
 /* GET home page. */
 router.get('/',function(req,res,next){
     console.log(res);
-    res.render('login',{
+    res.render('jmlogin',{
         title:'Login',
     });
 });
@@ -52,7 +52,7 @@ router.post('/',async function(req, res, next) {
         res.redirect('/jmkotsuhi');    //成功時の遷移先
     }else{
       client.end();
-      res.redirect('/login')  //失敗時の遷移先
+      res.redirect('/jmlogin')  //失敗時の遷移先
     }
   });
 });
