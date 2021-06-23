@@ -1,0 +1,143 @@
+/* ヘッダーの位置固定 */
+.header{
+    position: fixed;
+    margin-top: -250px;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+}
+.data{
+    margin-top: 250px;
+    width: 100%;
+}
+.employee{
+    margin-right: 100px;
+}
+.status{
+    margin-right: 10px;
+}
+/*右上ボタンの位置 */
+.list {
+    display: flex;
+    position:relative;
+    top:-28px;
+    left:41.5%;
+}
+.narrowDown{
+    height:38px;
+    display: flex;
+    position:relative;
+    top:3px;
+    left:42%;
+}
+/*ヘッダー・ 絞り込みボタン・プルダウンの位置固定 */
+.all {
+    display: flex;
+}
+    /* 左上ボタンの透明度 */
+.b1 {opacity:0.4; }
+/* ヘッダーテーブルのもろもろ */
+.st-tbl1 {
+    margin-top: -30px; 
+    background-color: #98D3F5;
+    border: 1.5px black solid;  
+    width: 100%;
+    table-layout:fixed
+}
+.syoninn{
+    border:1.5px black solid;
+    border-top-style:none;
+    border-bottom-style:none;
+    border-right-style:none;
+}
+.mi,.syoninn1,.kyakka,.comment{
+    border:1.5px black solid;
+    border-bottom-style:none;
+    border-right-style:none;
+}
+.st-tbl2 {
+    /* width: 1410px; */
+    margin-top: 10px;
+    background-color: #00CABC;
+    width: 100%;
+    table-layout:fixed
+}
+/* .employeeT{
+    width: 400px;
+}
+.jobT{
+    width: 400px;
+}
+.sumT{
+    width: 610px;
+} */
+    /* ヘッダーテーブルの固定とその位置 */
+/* thead {
+    position: sticky;
+    top: 150px;
+    background-color: #98D3F5;
+    border: 1.5px black solid;  
+    display: inline-block;
+    width: 100%;
+} */
+.st-tbl3 {
+    margin-top: 10px;
+    width: 100%;
+    table-layout:fixed
+}
+.div-tbl3{
+    overflow-y: scroll;
+    height: 27rem;
+}
+td:nth-child(1){
+    border:1.0px black solid;
+    border-bottom-style:none;
+    border-right-style:none;
+    word-wrap:break-word
+}
+td:nth-child(1).bikoran{
+    border:1.0px black solid;
+    border-top-style:none;
+    border-right-style:none;
+}   
+td:nth-child(2),td:nth-child(3),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7),td:nth-child(8),td:nth-child(9){
+    border:1.0px black solid;
+    border-bottom-style:none;
+    border-right-style:none;
+    border-left-style:none;
+}
+td:nth-child(10){ 
+    border:1.0px black solid;
+    border-right-style:none;
+}
+td:nth-child(11){ 
+    border:1.0px black solid;
+    border-right-style:none;
+    border-left-style:none;
+}
+td:nth-child(12){ 
+    border:1.0px black solid;
+    border-left-style:none;
+}
+input[type=radio] {
+    width: 100%;
+    height: 1.5em;
+    position: relative;
+}
+input[type=text] {
+    position: relative;
+    width:95%;
+}
+/* 右下ボタンの位置 */
+.btn1 {
+    display: flex;
+    position:relative;
+    top:150%;
+    left:68%;
+  }
+.confirm{
+    width:95px;
+}
+.b3,.b4{
+    margin-right: 10px;
+}
