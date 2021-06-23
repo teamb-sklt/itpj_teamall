@@ -40,17 +40,16 @@
 
   <table>
     <tr>
-      <th>月</th>
-      <th>日</th>
-      <th>支払先</th>
-      <th>摘要</th>
-      <th>金額</th>
-      <th>勘定科目</th>
-      <th>立替</th>
-      <th>Jobc</th>
-      <th>refNo</th>
-      <th>ステータス</th>
-      <th>コメント</th>  
+      <th width="35px">月</th>
+      <th width="35px">日</th>
+      <th width="100px">支払先</th>
+      <th width="80px">摘要</th>
+      <th width="65px">金額</th>
+      <th width="80px">勘定科目</th>
+      <th width="50px">立替</th>
+      <th width="50px">Job.C</th>
+      <th width="60px">Ref.No</th>
+      <th width="100px">ステータス</th>
     </tr>
   </table>
 
@@ -64,39 +63,51 @@
         <table class="info">
 
               <tr>
-                <td><%- rireki[k].month %></td>
-                <td><%- rireki[k].day %></td>
-                <td><%- rireki[k].payee %></td>
-                <td><%- rireki[k].summary %></td>
-                <td><%- rireki[k].amount %></td>
-                <td><%- rireki[k].code_name %></td>
-                <td><input type="checkbox" name="tatekae" id="tatekae"></td>
-                <td><input type="checkbox" name="jobc" id="jobc"></td>
-                <td><%- rireki[k].ref_no %></td>
-                <td>未申請</td>
-                <td><%- rireki[k].remarks %></td>
-                <!-- <td>コメント<input type="text" name="comment" id="comment"></td>  -->
-                <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
+                <td width="35px"><%- rireki[k].month %></td>
+                <td width="35px"><%- rireki[k].day %></td>
+                <td width="100px"><%- rireki[k].payee %></td>
+                <td width="80px"><%- rireki[k].summary %></td>
+                <td width="65px"><%- rireki[k].amount %></td>
+                <td width="80px"><%- rireki[k].code_name %></td>
+                <td width="50px"><input type="checkbox" name="tatekae" id="tatekae"></td>
+                <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
+                <td width="60px"><%- rireki[k].ref_no %></td>
+                <% if(rireki[k].status=="00"){ %>
+                  <td width="100px" class="first" rowspan="2">未申請</td>
+                <% }else if(rireki[k].status=="11"){ %> 
+                  <td width="100px" class="first" rowspan="2">JM申請中</td>
+                <% }else if(rireki[k].status=="19"){ %> 
+                  <td width="100px" class="first" rowspan="2">JM却下</td>
+                <% }else if(rireki[k].status=="21"){ %>
+                  <td width="100px" class="first" rowspan="2">経理申請中</td>
+                <% }else if(rireki[k].status=="29"){ %>
+                  <td width="100px" class="first" rowspan="2">経理却下</td>
+                <% }else if(rireki[k].status=="88"){ %>  
+                  <td width="100px" class="first" rowspan="2">承認</td>
+                <% } %>                 <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
                 <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
                 <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
                 <input type="hidden" name="branch_no" value="<%- rireki[k].branch_no %>">  
               </tr>
-            </table>  
-          <% } %>  
-        <% } %> 
-        <% } %>  
+              <tr>
+                <td class="comment" colspan="20"><%- rireki[k].remarks %></td>
+              </tr>
+            </table>
+          <% } %>
+        <% } %>
+        <% } %>
       <% } %>  
     <% } %> 
-    <% } %> 
-    <% } %> 
-    <div class="container">
-      <input type="button" data-toggle="modal" data-target="#sampleModal" data-watasu="XXX@skylight.co.jp" id="get_values" value="リマインド文面作成" >
-      <input type="button" onClick="checkAll()" value="チェックを全選択" >
-      <input type="button" onClick="uncheckAll()" value="チェックを全解除" >   
-      <p id="re"></p>      
-    </div>  
+  <% } %> 
+<% } %> 
 
-   <!-- モーダル・ダイアログ -->
+<div class="box">
+  <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全選択" class="allcheck">
+  <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
+  <input type="button" data-toggle="modal" data-target="#sampleModal" data-watasu="XXX@skylight.co.jp" id="get_values" value="リマインド送信" class="send_mail">
+</div>
+
+<!-- モーダル・ダイアログ -->
 <div class="modal" id="sampleModal" tabindex="-1">
 <div class="modal-dialog modal-lg">
   <div class="modal-content">

@@ -11,35 +11,41 @@
   </ul>
 </nav>
 
-<div class="date_box">
-  <button class="last" name="last" value="-1">◀</button>
-  <div class="b_box">
-    <b>○年○月分</b>
-  </div>
-  <button class="next" name="next" value="+1">▶</button>
-</div>
-
-<form action="/approve_tr" method="post">
+<form action="/approve_tr" method="post"> <!-- 年月 -->
   <input type="hidden" name="year" value="<%- year %>">
   <input type="hidden" name="month" value="<%- month %>">
-  <p>表示条件：ステータス</p>
-  <select name="status" id="status" class="select">
-    <option value="1=1">全て</option>
-    <option value="status='00'">未申請</option>
-    <option value="status='11'">JobM申請中</option>
-    <option value="status='19'">JobM却下</option>
-    <option value="status='21'">経理申請中</option>
-    <option value="status='29'">承認</option>
-    <option value="status='88'">却下</option>
-  </select>
-  <p>社員</p>
-  <select name="employee" id="employee" class="select">
-    <option value="1=1">全て</option>
-    <% for(var i=0;i<shain.length;i++){ %> 
-    <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
-    <% } %> 
-  </select>
-  <input type="submit" name="display" value="表示" class="search">  
+  <input type="hidden" name="status" value="1=1">
+  <input type="hidden" name="employee" value="1=1">
+  <div class="date_box">
+    <button class="last" name="last" value="-1">◀</button>
+    <b><%- year %>年 <%- month %>月分</b>
+    <button class="next" name="next" value="+1">▶</button>
+  </div>
+</form>
+
+<form action="/approve_tr" method="post">
+  <div class="search_box">
+    <input type="hidden" name="year" value="<%- year %>">
+    <input type="hidden" name="month" value="<%- month %>">
+    <div class="d">表示条件：ステータス</div>
+    <select name="status" id="status" class="select">
+      <option value="1=1">全て</option>
+      <option value="status='00'">未申請</option>
+      <option value="status='11'">JobM申請中</option>
+      <option value="status='19'">JobM却下</option>
+      <option value="status='21'">経理申請中</option>
+      <option value="status='29'">承認</option>
+      <option value="status='88'">却下</option>
+    </select>
+    <div class="d">社員</div>
+    <select name="employee" id="employee" class="select">
+      <option value="1=1">全て</option>
+      <% for(var i=0;i<shain.length;i++){ %> 
+      <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
+      <% } %> 
+    </select>
+    <input type="submit" name="display" value="表示" class="search">
+  </div>
 </form>
 
 <table>
@@ -94,17 +100,17 @@
             <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
             <td width="60px"><%- rireki[k].ref_no %></td>
             <% if(rireki[k].status=="00"){ %>
-              <td>未申請</td>
+              <td width="100px" class="first" rowspan="2">未申請</td>
             <% }else if(rireki[k].status=="11"){ %> 
-            <td>ジョブマネ申請中</td>
+              <td width="100px" class="first" rowspan="2">JM申請中</td>
             <% }else if(rireki[k].status=="19"){ %> 
-            <td>ジョブマネ却下</td>
+              <td width="100px" class="first" rowspan="2">JM却下</td>
             <% }else if(rireki[k].status=="21"){ %>
-            <td>経理申請中</td>
+              <td width="100px" class="first" rowspan="2">経理申請中</td>
             <% }else if(rireki[k].status=="29"){ %>
-            <td>経理却下</td>
+              <td width="100px" class="first" rowspan="2">経理却下</td>
             <% }else if(rireki[k].status=="88"){ %>  
-            <td>承認</td>
+              <td width="100px" class="first" rowspan="2">承認</td>
             <% } %> 
             <td width="70px" class="first" rowspan="2"><input type="button" value="検索" class="search"></td>
             <td width="180px" class="first" rowspan="2"><input type="text" class="comment"></td>

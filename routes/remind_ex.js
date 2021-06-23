@@ -61,7 +61,7 @@ router.get('/', async function(req, res, next) {
   }
   client.end()
   let opt={
-    title:'経費リマインド',
+    title:'リマインド - 経費',
     shain:shain,
     rireki:rireki,
     year:year,
@@ -113,7 +113,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'リマインド - 経費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -170,7 +170,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'リマインド - 経費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -227,7 +227,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'リマインド - 経費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -276,7 +276,7 @@ router.post('/', async function(req, res, next) {
     //console.log(rireki);
     client.end()
     let opt={
-      title:'経費リマインド',
+      title:'リマインド - 経費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -290,13 +290,14 @@ router.post('/', async function(req, res, next) {
 
   router.post('/post', async (req, res, next)=>{
     var address = [req.body.checks];
-    //console.log(address);
+    console.log(address);
     var text = [req.body.textarea];
     //console.log(text);
     var string= String(text);
     console.log(string);
   
-    var receiverEmailAddress = address //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
+    //var receiverEmailAddress = address //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
+    var receiverEmailAddress = 'mizuki.3612@gmail.com' 
     var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
     var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
   

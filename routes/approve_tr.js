@@ -119,7 +119,7 @@ router.post('/', async function(req, res, next) {
     console.log(rireki);
     client.end()
     let opt={
-      title:'経費承認',
+      title:'経理承認 - 交通費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -177,7 +177,7 @@ router.post('/', async function(req, res, next) {
     console.log(rireki);
     client.end()
     let opt={
-      title:'経費承認',
+      title:'経理承認 - 交通費',
       shain:shain,
       rireki:rireki,
       year:year,
@@ -234,7 +234,7 @@ router.post('/', async function(req, res, next) {
     console.log(rireki);
     client.end()
     let opt={
-      title:'経費承認',
+      title:'経理承認 - 交通費',
       shain:shain,
       rireki:rireki,
       year:year,

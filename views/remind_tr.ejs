@@ -22,38 +22,37 @@
       <% if(rireki[i].emp_no===shain[i].emp_no){ %>
         <table>
         <tr>
-          <th>リマインド</th>
-          <th>ステータス</th>
-          <th>社員番号</th>
-          <th>社員名</th>
+          <th width="140px">リマインド</th>
+          <th width="200px">ステータス</th>
+          <th width="200px">社員番号</th>
+          <th width="200px">社員名</th>
           <th>メールアドレス</th>
         </tr>
 
       <tr>
-        <td><input type="checkbox" class="item" name="checks" value= "<%= shain[i].emp_mail %>" ></td>
-        <td>経費保存</td>
-        <td><%- shain[i].emp_no %></td>
-        <td><%- shain[i].emp_name %></td>
+        <td width="140px"><input type="checkbox" class="item" name="checks" value= "<%= shain[i].emp_mail %>" ></td>
+        <td width="200px">経費保存</td>
+        <td width="200px"><%- shain[i].emp_no %></td>
+        <td width="200px"><%- shain[i].emp_name %></td>
         <td><%- shain[i].emp_mail %></td> 
       </tr>
     </table>
   
   <table>
     <tr>
-      <th>月</th>
-      <th>日</th>
-      <th>from</th>
-      <th>via</th>
-      <th>to</th>
-      <th>交通手段</th>
-      <th>単価</th>
-      <th>回数</th>
-      <th>小計</th>
-      <th>立替</th>
-      <th>Job.c</th>
-      <th>refNo</th>
-      <th>ステータス</th>
-      <th>コメント</th>
+      <th width="35px">月</th>
+      <th width="35px">日</th>
+      <th width="100px">From</th>
+      <th width="100px">Via</th>
+      <th width="100px">To</th>
+      <th width="80px">交通手段</th>
+      <th width="65px">単価</th>
+      <th width="50px">回数</th>
+      <th width="65px">小計</th>
+      <th width="50px">立替</th>
+      <th width="50px">Job.C</th>
+      <th width="60px">Ref.No</th>
+      <th width="100px">ステータス</th>
     </tr>
   </table>
       <% jn=0; %> 
@@ -65,11 +64,11 @@
           <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no&&rireki[k].status=="00"){ %>
             <table class="info">
                 <tr>
-                <td><%- rireki[k].month %></td>
-                <td><%- rireki[k].day %></td>
-                <td><%- rireki[k].trans_from %></td>
-                <td><%- rireki[k].trans_waypoint %></td>
-                <td><%- rireki[k].trans_to %></td>
+                <td width="35px"><%- rireki[k].month %></td>
+                <td width="35px"><%- rireki[k].day %></td>
+                <td width="100px"><%- rireki[k].trans_from %></td>
+                <td width="100px"><%- rireki[k].trans_waypoint %></td>
+                <td width="100px"><%- rireki[k].trans_to %></td>
                 <%const shudan = rireki[k].trans_type;
                 //console.log(shudan);
                     function hoge(){
@@ -83,21 +82,32 @@
                       var type = hoge();
                       //console.log(type);
                       %>
-                <td><%- type %></td>
-                <td><%- rireki[k].amount %></td>
-                <td><%- rireki[k].count %></td>
-                <td><%- rireki[k].amount*rireki[k].count %></td>
-                <td><input type="checkbox" name="tatekae" id="tatekae"></td>
-                <td><input type="checkbox" name="jobc" id="jobc"></td>
-                <td><%- rireki[k].remarks %></td>
-                <td><%- rireki[k].ref_no %></td>
-                <td>未申請</td>
-                <td><%- rireki[k].remarks %></td>
-                <!-- <td>コメント<input type="text" name="comment" id="comment"></td>  -->
-                <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
+                <td width="80px"><%- type %></td>
+                <td width="65px"><%- rireki[k].amount %></td>
+                <td width="50px"><%- rireki[k].count %></td>
+                <td width="65px"><%- rireki[k].amount*rireki[k].count %></td>
+                <td width="50px"><input type="checkbox" name="tatekae" id="tatekae"></td>
+                <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
+                <td width="60px"><%- rireki[k].ref_no %></td>
+                <% if(rireki[k].status=="00"){ %>
+                  <td width="100px" class="first" rowspan="2">未申請</td>
+                <% }else if(rireki[k].status=="11"){ %> 
+                  <td width="100px" class="first" rowspan="2">JM申請中</td>
+                <% }else if(rireki[k].status=="19"){ %> 
+                  <td width="100px" class="first" rowspan="2">JM却下</td>
+                <% }else if(rireki[k].status=="21"){ %>
+                  <td width="100px" class="first" rowspan="2">経理申請中</td>
+                <% }else if(rireki[k].status=="29"){ %>
+                  <td width="100px" class="first" rowspan="2">経理却下</td>
+                <% }else if(rireki[k].status=="88"){ %>  
+                  <td width="100px" class="first" rowspan="2">承認</td>
+                <% } %>                 <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
                 <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
                 <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
                 <input type="hidden" name="branch_no" value="<%- rireki[k].branch_no %>">  
+              </tr>
+              <tr>
+                <td class="comment" colspan="20"><%- rireki[k].remarks %></td>
               </tr>
             </table>  
           <% } %>  
@@ -108,27 +118,13 @@
     <% } %> 
     <% } %> 
 
-<!-- 
-  console.log(shudan);
-  function hoge(){
-    if (shudan === "1") {
-      return("電車");
-    } else if (shudan === "2") {
-      return("タクシー");
-    } else if (version === "3") 
-      return("バス");
-    }
-    var type = hoge();
-    console.log(type);
-    %>
--->
-<div class="container">
-<input type="button" data-toggle="modal" data-target="#sampleModal" data-watasu="XXX@skylight.co.jp" id="get_values" value="リマインド文面作成" >
-<input type="button" onClick="checkAll()" value="チェックを全選択" >
-<input type="button" onClick="uncheckAll()" value="チェックを全解除" >   
-<p id="re"></p>      
-</div> 
 
+<div class="box">
+  <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全選択" class="allcheck">
+  <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
+  <input type="button" data-toggle="modal" data-target="#sampleModal" data-watasu="XXX@skylight.co.jp" id="get_values" value="リマインド送信" class="send_mail">
+</div>
+    
 <!-- モーダル・ダイアログ -->
 <div class="modal" id="sampleModal" tabindex="-1">
 <div class="modal-dialog modal-lg">
@@ -140,7 +136,7 @@
 <div class="modal-body">    
 <!-- <span id="morau"></span><input type="hidden"><br> -->
 <!-- <input type="text" id="food" value=""> -->
-<textarea name=textarea  id="food" rows=”10″ cols=”200″ wrap=”hard” >        
+<textarea name=textarea  id="food" rows=”10″ cols=”200″ wrap=”hard” >
 各位お疲れさまです。
 経理の●●です。
 
