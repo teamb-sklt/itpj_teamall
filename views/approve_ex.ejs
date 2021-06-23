@@ -1,0 +1,168 @@
+<%- include('partials/header3')%>
+
+<nav class="navbar">
+  <ul class="top">
+    <li><a href="/remind_ex">リマインド画面</a></li>
+    <h3>承認画面</h3>
+  </ul>
+  <ul class="bottom">
+    <h3>経費</h3>
+    <li><a href="/approve_tr">交通費</a></li>
+  </ul>
+</nav>
+
+<form action="/approve_ex" method="post"> <!-- 年月 -->
+  <input type="hidden" name="year" value="<%- year %>">
+  <input type="hidden" name="month" value="<%- month %>">
+  <input type="hidden" name="status" value="1=1">
+  <input type="hidden" name="employee" value="1=1">
+  <div class="date_box">
+    <button class="last" name="last" value="-1">◀</button>
+    <b><%- year %>年 <%- month %>月分</b>
+    <button class="next" name="next" value="+1">▶</button>
+  </div>
+</form>
+
+<form action="/approve_ex" method="post">
+  <div class="search_box">
+    <input type="hidden" name="year" value="<%- year %>">
+    <input type="hidden" name="month" value="<%- month %>">
+    <div class="d">表示条件：ステータス</div>
+    <select name="status" id="status" class="select">
+      <option value="1=1">全て</option>
+      <option value="status='00'">未申請</option>
+      <option value="status='11'">JobM申請中</option>
+      <option value="status='19'">JobM却下</option>
+      <option value="status='21'">経理申請中</option>
+      <option value="status='29'">承認</option>
+      <option value="status='88'">却下</option>
+    </select>
+    <div class="d">社員</div>
+    <select name="employee" id="employee" class="select">
+      <option value="1=1">全て</option>
+      <% for(var i=0;i<shain.length;i++){ %> 
+      <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
+      <% } %> 
+    </select>
+    <input type="submit" name="display" value="表示" class="search">  
+  </div>
+</form>
+
+
+<table>
+  <tr>
+    <th width="40px">承認</th>
+    <th width="40px">却下</th>
+    <th width="35px">月</th>
+    <th width="35px">日</th>
+    <th width="100px">支払先</th>
+    <th width="80px">摘要</th>
+    <th width="65px">金額</th>
+    <th width="80px">勘定科目</th>
+    <th width="50px">立替</th>
+    <th width="50px">Job.C</th>
+    <th width="60px">Ref.No</th>
+    <th width="100px">ステータス</th>
+    <th width="185px">コメント</th>
+  </tr>
+</table>
+
+<form action="/approve_ex" method="post">
+  <% var jn; %> 
+  <% if(rireki[0]==null){ %>
+    <p>該当データはありません</p>
+  <% }else{ %> 
+  <% for(var i=0;i<shain.length;i++){ %> 
+    <p>社員名：<%- shain[i].emp_name %></p> 
+    <% for(var j=0;j<rireki.length;j++){ %>
+      <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
+        <p><%- rireki[j].job_no %></p>
+        <% jn=rireki[j].job_no; %> 
+      <% for(var k=0;k<rireki.length;k++){ %>
+        <% if(shain[i].emp_no===rireki[i].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
+          <table class="info">
+            <tr>
+              <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve" value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_year='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'"></td>
+              <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="deny" id="deny" value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_year='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'"></td>
+              <td width="35px"><%- rireki[k].month %></td>
+              <td width="35px"><%- rireki[k].day %></td>
+              <td width="100px"><%- rireki[k].payee %></td>
+              <td width="80px"><%- rireki[k].summary %></td>
+              <td width="65px"><%- rireki[k].amount %></td>
+              <td width="80px"><%- rireki[k].code_name %></td>
+              <td width="50px"><input type="checkbox" name="tatekae" id="tatekae"></td>
+              <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
+              <td width="60px"><%- rireki[k].ref_no %></td>
+              <% if(rireki[k].status=="00"){ %>
+                <td width="100px" class="first" rowspan="2">未申請</td>
+              <% }else if(rireki[k].status=="11"){ %> 
+                <td width="100px" class="first" rowspan="2">JM申請中</td>
+              <% }else if(rireki[k].status=="19"){ %> 
+                <td width="100px" class="first" rowspan="2">JM却下</td>
+              <% }else if(rireki[k].status=="21"){ %>
+                <td width="100px" class="first" rowspan="2">経理申請中</td>
+              <% }else if(rireki[k].status=="29"){ %>
+                <td width="100px" class="first" rowspan="2">経理却下</td>
+              <% }else if(rireki[k].status=="88"){ %>  
+                <td width="100px" class="first" rowspan="2">承認</td>
+              <% } %> 
+              <td width="185px" class="first" rowspan="2"><input type="text" name="comment" id="comment"></td> 
+              <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
+              <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
+              <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
+              <input type="hidden" name="branch_no" value="<%- rireki[k].branch_no %>">  
+            </tr>
+            <tr>
+              <td class="comment" colspan="20"><%- rireki[k].remarks %></td>
+            </tr>
+          </table>  
+        <% } %>  
+      <% } %> 
+      <% } %>  
+    <% } %>  
+  <% } %> 
+  <% } %> 
+
+  <div class="box">
+    <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全て承認" class="allcheck">
+    <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
+    <input type="button" value="確定" class="OK">
+  </div>
+  
+</form>
+<script>
+  const checkbox1 = document.getElementsByName("approve")
+  
+  function checkAll() {
+    for(i = 0; i < checkbox1.length; i++) {
+      checkbox1[i].checked = true
+    }
+  }
+  
+  const checkbox2 = document.getElementsByName("approve")
+  const checkbox3 = document.getElementsByName("deny")
+  function uncheckAll() {
+    for(i = 0; i < checkbox2.length; i++) {
+      checkbox2[i].checked = false
+      checkbox3[i].checked = false
+    }
+  }
+  
+  $('#get_values').on('click', function() {
+  
+  var vals = []; // 配列を定義
+  $('input[name="checks"]:checked').each(function() {
+      vals.push( $(this).val() ); // 配列に値を追加
+  });
+  
+  console.log(vals);
+  });
+
+  jQuery(function($){
+    $('input:checkbox').click(function() {
+      $(this).closest('.info tr').find('input:checkbox').not(this).prop('checked', false);
+    });
+  });      
+</script>
+
+<%- include('partials/footer')%>
