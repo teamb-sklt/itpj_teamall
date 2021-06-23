@@ -11,7 +11,7 @@
   </ul>
 </nav>
 
-<form action="/approve_tr" method="post"> <!-- 年月 -->
+<form action="/approve_ex" method="post">
   <input type="hidden" name="year" value="<%- year %>">
   <input type="hidden" name="month" value="<%- month %>">
   <input type="hidden" name="status" value="1=1">
@@ -133,8 +133,9 @@
 <div class="box">
   <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全て承認" class="allcheck">
   <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
-  <input type="button" value="確定" class="OK">
+  <input type="submit" value="確定" class="OK">
 </div>
+</form>
 
 <script>
   const checkbox1 = document.getElementsByName("approve")

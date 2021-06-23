@@ -11,45 +11,45 @@
   </ul>
 </nav>
 
-<form action="/approve_ex" method="post"> <!-- 年月 -->
-  <input type="hidden" name="year" value="<%- year %>">
-  <input type="hidden" name="month" value="<%- month %>">
-  <input type="hidden" name="status" value="1=1">
-  <input type="hidden" name="employee" value="1=1">
-  <div class="date_box">
-    <button class="last" name="last" value="-1">◀</button>
-    <b><%- year %>年 <%- month %>月分</b>
-    <button class="next" name="next" value="+1">▶</button>
-  </div>
-</form>
+    <form action="/approve_ex" method="post">
+      <input type="hidden" name="year" value="<%- year %>">
+      <input type="hidden" name="month" value="<%- month %>">
+      <input type="hidden" name="status" value="1=1">
+      <input type="hidden" name="employee" value="1=1">
+      <div class="date_box">
+        <button class="last" name="last" value="-1">◀</button>
+        <b><%- year %>年 <%- month %>月分</b>
+        <button class="next" name="next" value="+1">▶</button>
+      </div>
+    </form>
+    
 
-<form action="/approve_ex" method="post">
-  <div class="search_box">
-    <input type="hidden" name="year" value="<%- year %>">
-    <input type="hidden" name="month" value="<%- month %>">
-    <div class="d">表示条件：ステータス</div>
-    <select name="status" id="status" class="select">
-      <option value="1=1">全て</option>
-      <option value="status='00'">未申請</option>
-      <option value="status='11'">JobM申請中</option>
-      <option value="status='19'">JobM却下</option>
-      <option value="status='21'">経理申請中</option>
-      <option value="status='29'">承認</option>
-      <option value="status='88'">却下</option>
-    </select>
-    <div class="d">社員</div>
-    <select name="employee" id="employee" class="select">
-      <option value="1=1">全て</option>
-      <% for(var i=0;i<shain.length;i++){ %> 
-      <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
-      <% } %> 
-    </select>
-    <input type="submit" name="display" value="表示" class="search">  
-  </div>
-</form>
+    <form action="/approve_ex" method="post">
+    <div class="search_box">
+      <input type="hidden" name="year" value="<%- year %>">
+      <input type="hidden" name="month" value="<%- month %>">
+      <div class="d">表示条件：ステータス</div>
+      <select name="status" id="status" class="select">
+        <option value="1=1">全て</option>
+        <option value="status='00'">未申請</option>
+        <option value="status='11'">JobM申請中</option>
+        <option value="status='19'">JobM却下</option>
+        <option value="status='21'">経理申請中</option>
+        <option value="status='29'">承認</option>
+        <option value="status='88'">却下</option>
+      </select>
+      <div class="d">社員</div>
+      <select name="employee" id="employee" class="select">
+        <option value="1=1">全て</option>
+        <% for(var i=0;i<shain.length;i++){ %> 
+        <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
+        <% } %> 
+      </select>
+      <input type="submit" name="display" value="表示" class="search">
+    </div>
+  </form>
 
-
-<table>
+  <table>
   <tr>
     <th width="40px">承認</th>
     <th width="40px">却下</th>
@@ -74,12 +74,13 @@
   <% }else{ %> 
   <% for(var i=0;i<shain.length;i++){ %> 
     <p>社員名：<%- shain[i].emp_name %></p> 
+    <% jn=0; %> 
     <% for(var j=0;j<rireki.length;j++){ %>
       <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
         <p><%- rireki[j].job_no %></p>
         <% jn=rireki[j].job_no; %> 
       <% for(var k=0;k<rireki.length;k++){ %>
-        <% if(shain[i].emp_no===rireki[i].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
+        <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
           <table class="info">
             <tr>
               <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve" value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_year='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'"></td>
@@ -126,7 +127,7 @@
   <div class="box">
     <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全て承認" class="allcheck">
     <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
-    <input type="button" value="確定" class="OK">
+    <input type="submit" value="確定" class="OK">
   </div>
   
 </form>
