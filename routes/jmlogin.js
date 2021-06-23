@@ -27,7 +27,7 @@ router.post('/',async function(req, res, next) {
     user: 'postgres',
     host: 'localhost',
     database: 'itpjph3',
-    password: 'ayaka0807',
+    password: dbpassword,
     port: 5432
   })
   let account=req.body.account;
@@ -52,7 +52,7 @@ router.post('/',async function(req, res, next) {
         res.redirect('/jmkotsuhi');    //成功時の遷移先
     }else{
       client.end();
-      res.redirect('/login')  //失敗時の遷移先
+      res.redirect('/jmlogin')  //失敗時の遷移先
     }
   });
 });
