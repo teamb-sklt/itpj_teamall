@@ -11,6 +11,9 @@ var ex_thismonthRouter = require('./routes/ex_thismonth');
 var ex_lastmonthRouter = require('./routes/ex_lastmonth');
 var te_newrecordRouter = require('./routes/te_newrecord');
 var ex_newrecordRouter = require('./routes/ex_newrecord');
+var resultRouter = require('./routes/result');
+var ex_shinseiRouter = require('./routes/ex_shinsei');
+var te_shinseiRouter = require('./routes/te_shinsei');
 var ex_detailRouter = require('./routes/ex_detail');
 var te_detailRouter = require('./routes/te_detail');
 var jobsearchRouter = require('./routes/jobsearch');
@@ -21,6 +24,9 @@ var remindtrRouter = require('./routes/remind_tr');
 var approveexRouter = require('./routes/approve_ex');
 var approvetrRouter = require('./routes/approve_tr');
 var loginRouter = require('./routes/login2');
+var jmkotsuhiRouter = require('./routes/jmkotsuhi');
+var jmkehiRouter = require('./routes/jmkehi');
+var loginRouter = require('./routes/jmlogin');
 
 
 var app = express();
@@ -45,14 +51,22 @@ app.use('/te_newrecord',te_newrecordRouter);
 app.use('/ex_newrecord',ex_newrecordRouter);
 app.use('/ex_detail',ex_detailRouter);
 app.use('/te_detail',te_detailRouter);
+app.use('/result', resultRouter);
 app.use('/jobsearch',jobsearchRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
+app.use('/ex_shinsei',ex_shinseiRouter);
+app.use('/te_shinsei',te_shinseiRouter);
 app.use('/remind_ex', remindexRouter);
 app.use('/remind_tr', remindtrRouter);
 app.use('/approve_ex', approveexRouter);
 app.use('/approve_tr', approvetrRouter);
 app.use('/login2', loginRouter);
+app.use('/jmkotsuhi', jmkotsuhiRouter);
+app.use('/jmkehi', jmkehiRouter);
+app.use('/jmlogin', loginRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

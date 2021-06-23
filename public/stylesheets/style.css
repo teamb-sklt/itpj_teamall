@@ -103,6 +103,71 @@ h1 { /* タイトル */
   text-align: left;
 }
 
+/* .mishinsei {background-color: red;} */
+/* 申請チーム用CSS */
+#branch_no{
+  width: 50px;
+  
+}
+
+#trans_waypoint {
+  width: 735px;
+}
+#search {
+  width: 500px;
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#price {
+  width: 682px;
+  margin: 5px;
+}
+#way {
+  width: 294px;
+  margin: 5px;
+}
+#moveDate {
+  width: 633px;
+  margin: 5px;
+}
+#jobcode {
+  width: 194px;
+  margin: 5px;
+}
+#jobname {
+  width: 194px;
+  margin: 5px;
+}
+#jm {
+  width: 333px;
+  margin: 5px;
+}
+#memo {
+  width: 682px;
+  margin: 5px;
+}
+#times {
+  width: 316px;
+  margin: 5px;
+}
+#regularly {
+  transform: scale(1.4);
+}
+#jobcode2{
+  width: 194px;
+}
+#jobname2{
+  width: 194px;
+}
+input:checked+.content{
+  color: gray;
+}
+        /* マウスオンする要素とツールチップを横並びにする */
+        .c-tooltip {
+          display: inline-block;
+          position: relative;
+      }
 h2 { /* 期間 */
   margin: 10px 0 15px 0; /* 上 右 下 左 */
   color: #78aa00;
@@ -188,6 +253,41 @@ td.comment {
 textarea { 
   width: 500px; height:300px;
 }
+
+      /* マウスオンしたときのカーソルの設定 */
+      .c-tooltip:hover {
+          cursor: pointer;
+      }
+      .c-tooltip:hover::before {
+          opacity: 1;
+          visibility: visible;
+      }
+      .c-tooltip:hover::after {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      /*スマホ用CSS*/
+      @media only screen and (max-width: 800px) { 
+        #search{width: 200px;
+                margin:0 auto;
+              }
+        #year{width: 60px;
+         }
+        
+
+        #time{width: 63px;}
+        
+
+        #branch_no{display:none;}
+
+        label[for="branch_no"]{display:none;}
+        
+        #trans_waypoint{width:200px;}
+        #claim_flag{width: 20px;
+                    ;}
+        #charge_flag{width: 20px;}
+      }
 
 a {
   text-decoration: none;
