@@ -24,6 +24,9 @@ var remindtrRouter = require('./routes/remind_tr');
 var approveexRouter = require('./routes/approve_ex');
 var approvetrRouter = require('./routes/approve_tr');
 var loginRouter = require('./routes/login2');
+var jmkotsuhiRouter = require('./routes/jmkotsuhi');
+var jmkehiRouter = require('./routes/jmkehi');
+var loginRouter = require('./routes/jmlogin');
 
 
 var app = express();
@@ -59,6 +62,11 @@ app.use('/remind_tr', remindtrRouter);
 app.use('/approve_ex', approveexRouter);
 app.use('/approve_tr', approvetrRouter);
 app.use('/login2', loginRouter);
+app.use('/jmkotsuhi', jmkotsuhiRouter);
+app.use('/jmkehi', jmkehiRouter);
+app.use('/jmlogin', loginRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
