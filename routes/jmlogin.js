@@ -27,7 +27,7 @@ router.post('/',async function(req, res, next) {
     user: 'postgres',
     host: 'localhost',
     database: 'itpjph3',
-    password: 'ayaka0807',
+    password: dbpassword,
     port: 5432
   })
   let account=req.body.account;
