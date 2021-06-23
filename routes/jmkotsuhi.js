@@ -164,7 +164,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'dbpassword',
+      password:dbpassword,
       port:5432,
     });
 
@@ -267,7 +267,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'dbpassword',
+      password:dbpassword,
       port:5432,
     });
 
@@ -412,7 +412,7 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
-      password:'Psklt@363',
+      password:dbpassword,
       port:5432,
     });
 

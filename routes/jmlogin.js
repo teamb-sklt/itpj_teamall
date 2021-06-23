@@ -10,7 +10,7 @@ const dbpassword=process.env.PASSWORD;
 /* GET home page. */
 router.get('/',function(req,res,next){
     console.log(res);
-    res.render('login',{
+    res.render('jmlogin',{
         title:'Login',
     });
 });

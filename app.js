@@ -26,7 +26,7 @@ var approvetrRouter = require('./routes/approve_tr');
 var login2Router = require('./routes/login2');
 var jmkotsuhiRouter = require('./routes/jmkotsuhi');
 var jmkehiRouter = require('./routes/jmkehi');
-var loginRouter = require('./routes/jmlogin');
+var jmloginRouter = require('./routes/jmlogin');
 
 var app = express();
 
@@ -63,7 +63,7 @@ app.use('/approve_tr', approvetrRouter);
 app.use('/login2', login2Router);
 app.use('/jmkotsuhi', jmkotsuhiRouter);
 app.use('/jmkehi', jmkehiRouter);
-app.use('/jmlogin', loginRouter);
+app.use('/jmlogin', jmloginRouter);
 
 
 
