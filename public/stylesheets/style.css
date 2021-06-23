@@ -7,7 +7,15 @@ a {
   color: #00B7FF;
 }
 
+
+
+/* .mishinsei {background-color: red;} */
 /* 申請チーム用CSS */
+#branch_no{
+  width: 50px;
+  
+}
+
 #trans_waypoint {
   width: 735px;
 }
@@ -51,6 +59,12 @@ a {
 }
 #regularly {
   transform: scale(1.4);
+}
+#jobcode2{
+  width: 194px;
+}
+#jobname2{
+  width: 194px;
 }
 input:checked+.content{
   color: gray;
@@ -114,4 +128,26 @@ input:checked+.content{
       .c-tooltip:hover::after {
           opacity: 1;
           visibility: visible;
+      }
+
+      /*スマホ用CSS*/
+      @media only screen and (max-width: 800px) { 
+        #search{width: 200px;
+                margin:0 auto;
+              }
+        #year{width: 60px;
+         }
+        
+
+        #time{width: 63px;}
+        
+
+        #branch_no{display:none;}
+
+        label[for="branch_no"]{display:none;}
+        
+        #trans_waypoint{width:200px;}
+        #claim_flag{width: 20px;
+                    ;}
+        #charge_flag{width: 20px;}
       }
