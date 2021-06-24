@@ -317,17 +317,17 @@ router.post('/', async function(req, res, next) {
     //console.log(com6);
 
     if(app2){
-      var appup="UPDATE TeDetail set status='88' where "+app2+";";
+      var appup="UPDATE TeDetail set status='88' where "+app2+";"+" UPDATE TeComments set app_class='2',app_flag='1' where "+app2+";" ;
     }else{
       var appup="";
     }
     if(den2){
-      var denup="UPDATE TeDetail set status='29' where "+den2+";";
+      var denup="UPDATE TeDetail set status='29' where "+den2+";"+" UPDATE TeComments set app_class='2',app_flag='2' where "+den2+";" ;
     }else{
       var denup="";
     }
     if(com5){
-      var comup="UPDATE TeComments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
+      var comup="UPDATE tecomments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
     }else{
       var comup="";
     }
