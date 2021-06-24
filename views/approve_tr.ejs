@@ -85,8 +85,8 @@
         <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
           <table class="info">
           <tr>
-            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve"></td>
-            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="deny" id="deny"></td>
+            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
+            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="deny" id="deny" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
             <td width="35px"><%- rireki[k].month %></td>
             <td width="35px"><%- rireki[k].day %></td>
             <td width="100px"><%- rireki[k].trans_from %></td>
@@ -113,7 +113,7 @@
               <td width="100px" class="first" rowspan="2">承認</td>
             <% } %> 
             <td width="70px" class="first" rowspan="2"><input type="button" value="検索" class="search"></td>
-            <td width="180px" class="first" rowspan="2"><input type="text" class="comment"></td>
+            <td width="180px" class="first" rowspan="2"><input type="text" class="comment" name="comment"></td>
             <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
             <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
             <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
@@ -133,7 +133,7 @@
 <div class="box">
   <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全て承認" class="allcheck">
   <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
-  <input type="submit" value="確定" class="OK">
+  <input type="submit" name="decide" value="確定" class="OK">
 </div>
 </form>
 
@@ -166,10 +166,10 @@
   });
 
   jQuery(function($){
-    $('input:checkbox').click(function() {
-      $(this).closest('.info tr').find('input:checkbox').not(this).prop('checked', false);
+    $('.check').click(function() {
+      $(this).closest('.info tr').find('.check').not(this).prop('checked', false);
     });
-  });
+  });      
 
 </script>
 

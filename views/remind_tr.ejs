@@ -13,13 +13,17 @@
 
 <h2><span id="year"></span>年<br>
   <span id="date"></span>分</h2>
-  <form action="/remind_tr/post" method="post">
+
+  <form action="/remind_ex/post" method="post">
     <% var jn; %> 
-    <% if(rireki[0]==null){ %>
+    <% if(rireki[0]==null&&rireki[j].status!="00"){ %>
       <p>該当データはありません</p>
     <% }else{ %> 
     <% for(var i=0;i<shain.length;i++){ %> 
-      <% if(rireki[i].emp_no===shain[i].emp_no){ %>
+        <% jn=0; %> 
+        <% for(var j=0;j<rireki.length;j++){ %>
+          <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
+            <% jn=rireki[j].job_no; %> 
         <table>
         <tr>
           <th width="140px">リマインド</th>
@@ -55,10 +59,7 @@
       <th width="100px">ステータス</th>
     </tr>
   </table>
-      <% jn=0; %> 
-      <% for(var j=0;j<rireki.length;j++){ %>
-        <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
-          <% jn=rireki[j].job_no; %> 
+
           <p><%- rireki[j].job_no %></p>
         <% for(var k=0;k<rireki.length;k++){ %>
           <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no&&rireki[k].status=="00"){ %>
@@ -69,14 +70,14 @@
                 <td width="100px"><%- rireki[k].trans_from %></td>
                 <td width="100px"><%- rireki[k].trans_waypoint %></td>
                 <td width="100px"><%- rireki[k].trans_to %></td>
-                <%const shudan = rireki[k].trans_type;
+                <% const shudan = rireki[k].trans_type;
                 //console.log(shudan);
                     function hoge(){
                       if (shudan === "1") {
                         return("電車");
                       } else if (shudan === "2") {
                         return("タクシー");
-                      } else if (version === "3") 
+                      } else if (shudan === "3") 
                         return("バス");
                       }
                       var type = hoge();
@@ -101,7 +102,8 @@
                   <td width="100px" class="first" rowspan="2">経理却下</td>
                 <% }else if(rireki[k].status=="88"){ %>  
                   <td width="100px" class="first" rowspan="2">承認</td>
-                <% } %>                 <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
+                <% } %>                
+               <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
                 <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
                 <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
                 <input type="hidden" name="branch_no" value="<%- rireki[k].branch_no %>">  
@@ -116,9 +118,7 @@
       <% } %>  
     <% } %> 
     <% } %> 
-    <% } %> 
-
-
+ 
 <div class="box">
   <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全選択" class="allcheck">
   <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">

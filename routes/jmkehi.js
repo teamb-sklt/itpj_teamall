@@ -162,7 +162,11 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
+<<<<<<< HEAD
       password: dbpassword,
+=======
+      password:dbpassword,
+>>>>>>> 67011951e390a8359557068cffd977f83d4bb6d8
       port:5432,
     });
 
@@ -262,7 +266,11 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
+<<<<<<< HEAD
       password: dbpassword,
+=======
+      password:dbpassword,
+>>>>>>> 67011951e390a8359557068cffd977f83d4bb6d8
       port:5432,
     });
 
@@ -403,7 +411,11 @@ router.post('/',async function(req,response,next){
       user:'postgres',
       host:'localhost',
       database:'itpjph3',
+<<<<<<< HEAD
       password: dbpassword,
+=======
+      password:dbpassword,
+>>>>>>> 67011951e390a8359557068cffd977f83d4bb6d8
       port:5432,
     });
 

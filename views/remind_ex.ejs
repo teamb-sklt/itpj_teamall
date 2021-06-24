@@ -20,7 +20,11 @@
       <p>該当データはありません</p>
     <% }else{ %> 
     <% for(var i=0;i<shain.length;i++){ %> 
-      <% if(rireki[i].emp_no===shain[i].emp_no){ %>
+        <% jn=0; %> 
+        <% for(var j=0;j<rireki.length;j++){ %>
+          <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
+            <% jn=rireki[j].job_no; %> 
+            
       <table>
         <tr>
         <th>リマインド</th>
@@ -52,12 +56,7 @@
       <th width="100px">ステータス</th>
     </tr>
   </table>
-
-  <% jn=0; %> 
-  <% for(var j=0;j<rireki.length;j++){ %>
-    <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
-      <% jn=rireki[j].job_no; %> 
-      <p><%- rireki[j].job_no %></p>
+  <p><%- rireki[j].job_no %></p>
     <% for(var k=0;k<rireki.length;k++){ %>
       <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no&&rireki[k].status=="00"){ %>
         <table class="info">
@@ -99,7 +98,6 @@
       <% } %>  
     <% } %> 
   <% } %> 
-<% } %> 
 
 <div class="box">
   <input type="button" id="checkall" name="checkall" onclick="checkAll()" value="全選択" class="allcheck">
