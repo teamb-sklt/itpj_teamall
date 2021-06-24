@@ -14,7 +14,7 @@
 <h2><span id="year"></span>年<br>
   <span id="date"></span>分</h2>
 
-  <form action="/remind_ex/post" method="post">
+  <form action="/remind_tr/post" method="post">
     <% var jn; %> 
     <% if(rireki[0]==null&&rireki[j].status!="00"){ %>
       <p>該当データはありません</p>
@@ -25,38 +25,38 @@
           <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn&&rireki[j].status=="00"){ %>
             <% jn=rireki[j].job_no; %> 
         <table>
-        <tr>
-          <th width="140px">リマインド</th>
-          <th width="200px">ステータス</th>
-          <th width="200px">社員番号</th>
-          <th width="200px">社員名</th>
-          <th>メールアドレス</th>
-        </tr>
+          <tr>
+            <th width="15%">リマインド</th>
+            <th width="15%">ステータス</th>
+            <th width="15%">社員番号</th>
+            <th width="15%">社員名</th>
+            <th width="40%">メールアドレス</th>
+          </tr>
 
       <tr>
-        <td width="140px"><input type="checkbox" class="item" name="checks" value= "<%= shain[i].emp_mail %>" ></td>
-        <td width="200px">経費保存</td>
-        <td width="200px"><%- shain[i].emp_no %></td>
-        <td width="200px"><%- shain[i].emp_name %></td>
+        <td><input type="checkbox" class="item" name="checks" value= "<%= shain[i].emp_mail %>" ></td>
+        <td>経費保存</td>
+        <td><%- shain[i].emp_no %></td>
+        <td><%- shain[i].emp_name %></td>
         <td><%- shain[i].emp_mail %></td> 
       </tr>
     </table>
   
   <table>
     <tr>
-      <th width="35px">月</th>
-      <th width="35px">日</th>
-      <th width="100px">From</th>
-      <th width="100px">Via</th>
-      <th width="100px">To</th>
-      <th width="80px">交通手段</th>
-      <th width="65px">単価</th>
-      <th width="50px">回数</th>
-      <th width="65px">小計</th>
-      <th width="50px">立替</th>
-      <th width="50px">Job.C</th>
-      <th width="60px">Ref.No</th>
-      <th width="100px">ステータス</th>
+      <th width="4%">月</th>
+      <th width="4%">日</th>
+      <th width="11%">From</th>
+      <th width="11%">Via</th>
+      <th width="11%">To</th>
+      <th width="8%">交通手段</th>
+      <th width="7%">単価</th>
+      <th width="5%">回数</th>
+      <th width="7%">小計</th>
+      <th width="7%">立替</th>
+      <th width="7%">Job.C</th>
+      <th width="7%">Ref.No</th>
+      <th width="11%">ステータス</th>
     </tr>
   </table>
 
@@ -65,11 +65,11 @@
           <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no&&rireki[k].status=="00"){ %>
             <table class="info">
                 <tr>
-                <td width="35px"><%- rireki[k].month %></td>
-                <td width="35px"><%- rireki[k].day %></td>
-                <td width="100px"><%- rireki[k].trans_from %></td>
-                <td width="100px"><%- rireki[k].trans_waypoint %></td>
-                <td width="100px"><%- rireki[k].trans_to %></td>
+                <td width="4%" class="first" rowspan="2"><%- rireki[k].month %></td>
+                <td width="4%" class="first" rowspan="2"><%- rireki[k].day %></td>
+                <td width="11%"><%- rireki[k].trans_from %></td>
+                <td width="11%"><%- rireki[k].trans_waypoint %></td>
+                <td width="11%"><%- rireki[k].trans_to %></td>
                 <% const shudan = rireki[k].trans_type;
                 //console.log(shudan);
                     function hoge(){
@@ -83,25 +83,35 @@
                       var type = hoge();
                       //console.log(type);
                       %>
-                <td width="80px"><%- type %></td>
-                <td width="65px"><%- rireki[k].amount %></td>
-                <td width="50px"><%- rireki[k].count %></td>
-                <td width="65px"><%- rireki[k].amount*rireki[k].count %></td>
-                <td width="50px"><input type="checkbox" name="tatekae" id="tatekae"></td>
-                <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
-                <td width="60px"><%- rireki[k].ref_no %></td>
+                <td width="8%"><%- type %></td>
+                <td width="7%"><%- rireki[k].amount %></td>
+                <td width="5%"><%- rireki[k].count %></td>
+                <td width="7%"><%- rireki[k].amount*rireki[k].count %></td>
+                <% if(rireki[k].claim_flag=="0"){ %>
+                  <td width="7%"><input type="checkbox" name="tatekae" id="tatekae"></td>
+                <% }else if(rireki[k].claim_flag=="1"){ %> 
+                  <td width="7%"><input type="checkbox" name="tatekae" id="tatekae" checked="checked"></td>
+                <% } %>      
+
+                <% if(rireki[k].charge_flag=="0"){ %>
+                  <td width="7%"><input type="checkbox" name="jobc" id="jobc"></td>
+                <% }else if(rireki[k].charge_flag=="1"){ %> 
+                  <td width="7%"><input type="checkbox" name="jobc" id="jobc" checked="checked"></td>
+                <% } %>  
+                
+                <td width="7%"><%- rireki[k].ref_no %></td>
                 <% if(rireki[k].status=="00"){ %>
-                  <td width="100px" class="first" rowspan="2">未申請</td>
+                  <td width="11%" class="first" rowspan="2">未申請</td>
                 <% }else if(rireki[k].status=="11"){ %> 
-                  <td width="100px" class="first" rowspan="2">JM申請中</td>
+                  <td width="11%" class="first" rowspan="2">JM申請中</td>
                 <% }else if(rireki[k].status=="19"){ %> 
-                  <td width="100px" class="first" rowspan="2">JM却下</td>
+                  <td width="11%" class="first" rowspan="2">JM却下</td>
                 <% }else if(rireki[k].status=="21"){ %>
-                  <td width="100px" class="first" rowspan="2">経理申請中</td>
+                  <td width="11%" class="first" rowspan="2">経理申請中</td>
                 <% }else if(rireki[k].status=="29"){ %>
-                  <td width="100px" class="first" rowspan="2">経理却下</td>
+                  <td width="11%" class="first" rowspan="2">経理却下</td>
                 <% }else if(rireki[k].status=="88"){ %>  
-                  <td width="100px" class="first" rowspan="2">承認</td>
+                  <td width="11%" class="first" rowspan="2">承認</td>
                 <% } %>                
                <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
                 <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
@@ -197,7 +207,7 @@ $("#btn1").on('click', function() {
 $('#sampleModal').modal('hide');
 var foodVal = $('#food').val();
 //$('#re').text(foodVal);
-console.log(foodVal)
+//console.log(foodVal)
 });
 
 jQuery(function($){
@@ -205,6 +215,13 @@ $('input:checkbox').click(function() {
 $(this).closest('.info tr').find('input:checkbox').not(this).prop('checked', false);
 });
 });
+
+var doSomething = function() {
+  alert(success);
+};
+
+doSomething();
+
 </script>
 
 <%- include('partials/footer')%>

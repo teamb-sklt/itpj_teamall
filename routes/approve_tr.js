@@ -38,14 +38,14 @@ router.get('/', async function(req, res, next) {
     port: 5432
   })
   await client.connect()
-  console.log(client)
+  //console.log(client)
   client.query('SELECT * from Employee', function(err, result){
     if (err){
       console.log(err) //show error infomation
     }
-    console.log(result)
+    //console.log(result)
     for(var i of result.rows){
-      console.log(i)                  
+      //console.log(i)                  
     }
     let shain = result.rows
     for(let i = 0; i <= result.rows; i++){
@@ -53,13 +53,13 @@ router.get('/', async function(req, res, next) {
   }
 
   client.query("SELECT * from TeDetail where sheet_year='"+year+"' and sheet_month= '"+tmonth+"'", function(err, result){
-    console.log(tmonth);
+    //console.log(tmonth);
     if (err){
       console.log(err) //show error infomation
     }
-    console.log(result)
+    //console.log(result)
     for(var i of result.rows){
-      console.log(i)                  
+      //console.log(i)                  
     }
     let rireki = result.rows
     for(let i = 0; i <= result.rows; i++){
@@ -83,7 +83,7 @@ router.post('/', async function(req, res, next) {
   if(req.body.display){
     year=req.body.year;
     tmonth=req.body.month;
-    console.log(req.body);
+    //console.log(req.body);
     const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
@@ -97,7 +97,7 @@ router.post('/', async function(req, res, next) {
       port: 5432
     })
     await client.connect()
-    console.log(client)
+    //console.log(client)
     client.query("SELECT * from Employee where "+req.body.employee, function(err, result){
       if (err){
         console.log(err) //show error infomation
@@ -106,7 +106,9 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       shain.push(result.rows[i])
     }
+    console.log(req.body.employee);
     console.log(shain);
+    
   
     client.query("SELECT * from TeDetail where "+req.body.employee+" and "+req.body.status+" and sheet_year='"+year+"' and sheet_month= '"+tmonth+"'", function(err, result){
       if (err){
@@ -116,7 +118,7 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       rireki.push(result.rows[i])
     }
-    console.log(rireki);
+    //console.log(rireki);
     client.end()
     let opt={
       title:'経理承認 - 交通費',
@@ -141,7 +143,7 @@ router.post('/', async function(req, res, next) {
     }else{
       tmonth=('00'+(req.body.month-1)).slice(-2);
     }
-    console.log(req.body);
+    //console.log(req.body);
     const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
@@ -155,7 +157,7 @@ router.post('/', async function(req, res, next) {
       port: 5432
     })
     await client.connect()
-    console.log(client)
+    //console.log(client)
     client.query("SELECT * from Employee where "+req.body.employee, function(err, result){
       if (err){
         console.log(err) //show error infomation
@@ -164,7 +166,7 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       shain.push(result.rows[i])
     }
-    console.log(shain);
+    //console.log(shain);
   
     client.query("SELECT * from TeDetail where "+req.body.employee+" and "+req.body.status+" and sheet_year='"+year+"' and sheet_month='"+tmonth+"'", function(err, result){
       if (err){
@@ -174,7 +176,7 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       rireki.push(result.rows[i])
     }
-    console.log(rireki);
+    //console.log(rireki);
     client.end()
     let opt={
       title:'経理承認 - 交通費',
@@ -198,7 +200,7 @@ router.post('/', async function(req, res, next) {
     }else{
       tmonth=('00'+(Number(req.body.month)+1)).slice(-2);
     }
-    console.log(req.body);
+    //console.log(req.body);
     const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
@@ -221,8 +223,8 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       shain.push(result.rows[i])
     }
-    console.log(shain);
-  
+    //console.log(shain);
+    
     client.query("SELECT * from TeDetail where "+req.body.employee+" and "+req.body.status+" and sheet_year='"+year+"' and sheet_month= '"+tmonth+"'", function(err, result){
       if (err){
         console.log(err) //show error infomation
@@ -231,7 +233,7 @@ router.post('/', async function(req, res, next) {
       for(let i = 0; i <= result.rows; i++){
       rireki.push(result.rows[i])
     }
-    console.log(rireki);
+    //console.log(rireki);
     client.end()
     let opt={
       title:'経理承認 - 交通費',
@@ -247,7 +249,7 @@ router.post('/', async function(req, res, next) {
   }else if(req.body.decide){
       year=req.body.year;
       tmonth=req.body.month;
-      console.log(req.body)
+      //console.log(req.body)
     const client = (process.env.ENVIRONMENT == "LIVE") ? new Client({
       connectionString: process.env.DATABASE_URL,
       ssl: {
@@ -267,12 +269,14 @@ router.post('/', async function(req, res, next) {
     if(req.body.approve!==undefined){
       if(req.body.approve[0].length==1){
         app2=req.body.approve;
+        //console.log(app2);
       }else if(req.body.approve.length>1){
         var app=[];
         for(let i in req.body.approve){
           app.push(req.body.approve[i]);
         }
         app2=app.join(" or ");
+        //console.log(app);
       }
     }
 
@@ -280,12 +284,14 @@ router.post('/', async function(req, res, next) {
     if(req.body.deny!==undefined){
       if(req.body.deny[0].length===1){
         den2=req.body.deny;
+        //console.log(den2); //(emp_no='003' and sheet_year='2021' and sheet_month='07' and branch_no='11')
       }else if(req.body.deny.length>1){
         var den=[];
         for(let i in req.body.deny){
           den.push(req.body.deny[i]);
         }
         den2=den.join(" or ");
+        //console.log(den);
       }
     }
     
@@ -304,11 +310,11 @@ router.post('/', async function(req, res, next) {
     var com6=com4.join(" ");
 
     await client.connect()
-    console.log(client);
-    console.log(app2);
-    console.log(den2);
-    console.log(com5);
-    console.log(com6);
+    //console.log(client);
+    //console.log(app2);
+    //console.log(den2);
+    //console.log(com5);
+    //console.log(com6);
 
     if(app2){
       var appup="UPDATE TeDetail set status='88' where "+app2+";";
@@ -326,20 +332,89 @@ router.post('/', async function(req, res, next) {
       var comup="";
     }
 
-    console.log(1);
+    //console.log(1);
+    //console.log(appup+denup+comup);
 
+ /*  //addressのままなら配列？
+  var address = [req.body.approve];
+  var string_app= String(address);
+  //console.log(string_app);
 
-    client.query(appup+denup+comup, function(err, result){
+  //多分文字列にする必要あり
+  var approve_no1 =string_app.substr( 1, 12 );
+    //console.log(approve_no1);
+
+  client.query("SELECT * from Employee where "+approve_no1+"",function (err, result){
+    if (err){
+      console.log(err) //show error infomation
+    }
+    for(let i = 0; i <= result.rows; i++){
+      address.push(result.rows[i])
+      console.log(address);
+ } 
+}); */
+    
+    
+/*     var str = app2;
+    str.split('').forEach( function( value ) {
+    console.log( value );
+  }); */
+   
+
+    /* var string_app= String(app2);
+    console.log(string_app);
+    var string_deny= String(den2);
+    console.log(string_deny);
+
+    var approve_no1 =string_app.substr( 8, 5 );
+    console.log(approve_no1);
+    var approve_no2 =string_deny.substr( 8, 5 );
+    console.log(approve_no2); */
+
+    /* var receiverEmailAddress = 'mizuki.3612@gmail.com' //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
+    var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
+    var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
+  
+    //SMTPサーバの基本情報設定
+    var transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // SSL
+      auth: {
+        user: senderEmailAddress,
+        pass: senderEmailPassword
+      }
+    });
+  
+    //メール情報の作成
+    var mailOptions1 = {
+      from: senderEmailAddress,
+      to: receiverEmailAddress,
+      subject: '【経費申請】未申請のデータがあります',　//件名
+      text: string　//本文
+    };
+  
+  　//メール情報の作成
+    transporter.sendMail(mailOptions1, function (error, info) {
+      if (error) {
+        console.log('失敗');
+
+      } else {
+        console.log('成功'); */
+        
+      //res.redirect('/apprpve_tr'); 
+
+     client.query(appup+denup+comup, function(err, result){
       if (err){
-        console.log(err) //show error infomation
+        //console.log(err) //show error infomation
       }
     });
     client.end();
-    res.redirect('/approve_tr');
-
-  }
-
+    res.redirect('/approve_tr'); 
+  };
 });
+/* } */
+/* }); */
 
 
 module.exports = router;

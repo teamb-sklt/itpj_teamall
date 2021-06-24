@@ -1,7 +1,6 @@
 .box {
 	position: relative;
 	height: 50px;
-  /* background: #eeeeee; */
 }
 
 .date_box {
@@ -9,11 +8,9 @@
   margin: 5px auto 15px auto;
   width: 360px;
 	height: 40px;
-  /* background: #eeeeee; */
 }
 
 .search_box{
-  /* background: #eeeeee; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +30,7 @@ button {
   display: block;
 }
 button.last { /* 先月 */
-  background: #eeeeee;
+  background: #ffffff;
   width: 40px;
   height: 30px;
   font-size: 15px;
@@ -43,7 +40,7 @@ button.last { /* 先月 */
 	top:5px;
 }
 button.next { /* 来月 */
-  background: #eeeeee;
+  background: #ffffff;
   width: 40px;
   height: 30px;
   font-size: 15px;
@@ -53,7 +50,7 @@ button.next { /* 来月 */
 	top:5px;
 }
 .search {
-  background: #eeeeee;
+  background: #ffffff;
   width: 50px;
   height: 30px;
   font-size: 14px;
@@ -81,7 +78,7 @@ button.next:hover {
 
 .allcheck { /* すべてチェック */
   margin: 5px 0 0 5px; /* 上 右 下 左 */
-  background: #eeeeee;
+  background: #ffffff;
   width: 80px;
   height: 30px;
   font-size: 14px;
@@ -94,7 +91,7 @@ button.next:hover {
 
 .send_mail { /* 確定ボタン */
   color: #002b49;
-  background: #eeeeee;
+  background: #ffffff;
   width: 160px;
   height: 30px;
   font-size: 14px;

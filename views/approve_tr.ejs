@@ -50,23 +50,23 @@
 
 <table>
   <tr>
-    <th width="40px">承認</th>
-    <th width="40px">却下</th>
-    <th width="35px">月</th>
-    <th width="35px">日</th>
-    <th width="100px">From</th>
-    <th width="100px">Via</th>
-    <th width="100px">To</th>
-    <th width="80px">交通手段</th>
-    <th width="65px">単価</th>
-    <th width="50px">回数</th>
-    <th width="65px">小計</th>
-    <th width="50px">立替</th>
-    <th width="50px">Job.C</th>
-    <th width="60px">Ref.No</th>
-    <th width="100px">ステータス</th>
-    <th width="70px">経路<br>検索</th>
-    <th width="185px">コメント</th>
+    <th width="4%">承認</th>
+    <th width="4%">却下</th>
+    <th width="3%">月</th>
+    <th width="3%">日</th>
+    <th width="9%">From</th>
+    <th width="9%">Via</th>
+    <th width="9%">To</th>
+    <th width="8%">交通手段</th>
+    <th width="5%">単価</th>
+    <th width="4%">回数</th>
+    <th width="5%">小計</th>
+    <th width="5%">立替</th>
+    <th width="5%">Job.C</th>
+    <th width="5%">Ref.No</th>
+    <th width="8%">ステータス</th>
+    <th width="5%">経路<br>検索</th>
+    <th width="16%">コメント</th>
   </tr>
 </table>
 <form action="/approve_tr" method="post">
@@ -85,35 +85,62 @@
         <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
           <table class="info">
           <tr>
-            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
-            <td width="40px" class="first" rowspan="2"><input type="checkbox" class="check" name="deny" id="deny" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
-            <td width="35px"><%- rireki[k].month %></td>
-            <td width="35px"><%- rireki[k].day %></td>
-            <td width="100px"><%- rireki[k].trans_from %></td>
-            <td width="100px"><%- rireki[k].trans_waypoint %></td>
-            <td width="100px"><%- rireki[k].trans_to %></td>
-            <td width="80px"><%- rireki[k].trans_type %></td>
-            <td width="65px"><%- rireki[k].amount %></td>
-            <td width="50px"><%- rireki[k].count %></td>
-            <td width="65px">小計</td>
-            <td width="50px"><input type="checkbox" name="tatekae" id="tatekae"></td>
-            <td width="50px"><input type="checkbox" name="jobc" id="jobc"></td>
-            <td width="60px"><%- rireki[k].ref_no %></td>
+            <td width="4%" class="first" rowspan="2"><input type="checkbox" class="check" name="approve" id="approve" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
+            <td width="4%" class="first" rowspan="2"><input type="checkbox" class="check" name="deny" id="deny" value="(emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>')"></td>
+            <td width="3%"><%- rireki[k].month %></td>
+            <td width="3%"><%- rireki[k].day %></td>
+            <td width="9%"><%- rireki[k].trans_from %></td>
+            <td width="9%"><%- rireki[k].trans_waypoint %></td>
+            <td width="9%"><%- rireki[k].trans_to %></td>
+            <% const shudan = rireki[k].trans_type;
+                //console.log(shudan);
+                    function hoge(){
+                      if (shudan === "1") {
+                        return("電車");
+                      } else if (shudan === "2") {
+                        return("タクシー");
+                      } else if (shudan === "3") 
+                        return("バス");
+                      }
+                      var type = hoge();
+                      //console.log(type);
+                      %>
+            <td width="8%"><%-type %></td>
+            <td width="5%"><%- rireki[k].amount %></td>
+            <td width="4%"><%- rireki[k].count %></td>
+            <td width="5%"><%- rireki[k].amount*rireki[k].count %></td>
+
+            <% if(rireki[k].claim_flag=="0"){ %>
+              <td width="5%"><input type="checkbox" name="tatekae" id="tatekae"></td>
+            <% }else if(rireki[k].claim_flag=="1"){ %> 
+              <td width="5%"><input type="checkbox" name="tatekae" id="tatekae" checked="checked"></td>
+            <% } %>      
+
+            <% if(rireki[k].charge_flag=="0"){ %>
+              <td width="5%"><input type="checkbox" name="jobc" id="jobc"></td>
+            <% }else if(rireki[k].charge_flag=="1"){ %> 
+              <td width="5%"><input type="checkbox" name="jobc" id="jobc" checked="checked"></td>
+            <% } %>  
+            
+            <td width="5%"><%- rireki[k].ref_no %></td>
             <% if(rireki[k].status=="00"){ %>
-              <td width="100px" class="first" rowspan="2">未申請</td>
+              <td width="8%" class="first" rowspan="2">未申請</td>
             <% }else if(rireki[k].status=="11"){ %> 
-              <td width="100px" class="first" rowspan="2">JM申請中</td>
+              <td width="8%" class="first" rowspan="2">JM申請中</td>
             <% }else if(rireki[k].status=="19"){ %> 
-              <td width="100px" class="first" rowspan="2">JM却下</td>
+              <td width="8%" class="first" rowspan="2">JM却下</td>
             <% }else if(rireki[k].status=="21"){ %>
-              <td width="100px" class="first" rowspan="2">経理申請中</td>
+              <td width="8%" class="first" rowspan="2">経理申請中</td>
             <% }else if(rireki[k].status=="29"){ %>
-              <td width="100px" class="first" rowspan="2">経理却下</td>
+              <td width="8%" class="first" rowspan="2">経理却下</td>
             <% }else if(rireki[k].status=="88"){ %>  
-              <td width="100px" class="first" rowspan="2">承認</td>
+              <td width="8%" class="first" rowspan="2">承認</td>
             <% } %> 
-            <td width="70px" class="first" rowspan="2"><input type="button" value="検索" class="search"></td>
-            <td width="180px" class="first" rowspan="2"><input type="text" class="comment" name="comment"></td>
+            <div class="container">
+            <td width="5%" class="first" rowspan="2"><input type="button" value="検索" class="search" data-toggle="modal" data-target="#sampleModal" ></td>
+            <p id="re"></p> 
+            </div>
+            <td width="16%" class="first" rowspan="2"><input type="text" class="comment" name="comment"></td>
             <input type="hidden" name="emp_no" value="<%- rireki[k].emp_no %>">
             <input type="hidden" name="year" value="<%- rireki[k].sheet_year %>"> 
             <input type="hidden" name="month" value="<%- rireki[k].sheet_month %>"> 
@@ -135,7 +162,25 @@
   <input type="button" onclick="uncheckAll()" value="全解除" class="allcheck">
   <input type="submit" name="decide" value="確定" class="OK">
 </div>
-</form>
+
+<!-- モーダル・ダイアログ -->
+<div class="modal" id="sampleModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+        <!-- <h4 class="modal-title">タイトル</h4> -->
+      </div>
+      <div class="modal-body">
+        <h4>APIのデータを表示</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+        <!-- <button type="button" id="btn1" class="btn btn-primary">ボタン1</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   const checkbox1 = document.getElementsByName("approve")
@@ -164,6 +209,18 @@
 
   console.log(vals);
   });
+
+  //モーダルポップアップの表示
+  $('#sampleModal').on('show.bs.modal', function (event) {
+    //モーダルを開いたボタンを取得
+    var button = $(event.relatedTarget);
+    /* //data-watasuの値取得
+    var watasuVal = button.data('watasu');
+    //モーダルを取得
+    var modal = $(this);
+    //受け取った値をspanタグのとこに表示
+    modal.find('.modal-body span#morau').text(watasuVal); */
+});
 
   jQuery(function($){
     $('.check').click(function() {

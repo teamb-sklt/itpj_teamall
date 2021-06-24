@@ -146,8 +146,9 @@ h3 { /* 現場所 */
 
 /* 表 */
 table {
+  table-layout: fixed;
   margin: 0px auto;
-  margin-top: 3px;
+  margin-bottom: 3px;
   padding: 0;
   width: 100%; /* 中央に表示 */
   border-radius: 0px; /* 角の丸み */
