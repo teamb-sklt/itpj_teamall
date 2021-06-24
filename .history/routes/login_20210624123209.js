@@ -67,7 +67,7 @@ router.post('/',async function(req, res, next) {
         // let name=result.rows[0].emp_name;
         let a=result.rows[0];
         client.end();
-        res.redirect('/te_thismonth');    //成功時の遷移先
+        res.redirect('/remind_ex');    //成功時の遷移先
     }else{
       client.end();
       res.redirect('/login')  //失敗時の遷移先
