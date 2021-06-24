@@ -1,0 +1,130 @@
+.box {
+	position: relative;
+	height: 50px;
+  /* background: #ffffff; */
+}
+
+.date_box {
+	position: relative;
+  margin: 5px auto 15px auto;
+  width: 360px;
+	height: 40px;
+  /* background: #ffffff; */
+}
+
+.search_box{
+  /* background: #ffffff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+b {
+  margin: 15px;
+  color: #78aa00;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+button {
+  margin: 0; /* 上 右 下 左 */
+  color: #002b49;
+  display: block;
+}
+button.last { /* 先月 */
+  background: #ffffff;
+  width: 40px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 10px; /* 角の丸み */
+	position:absolute;
+  left:10px;
+	top:5px;
+}
+button.next { /* 来月 */
+  background: #ffffff;
+  width: 40px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 10px; /* 角の丸み */
+	position:absolute;
+  right:10px;
+	top:5px;
+}
+.search {
+  background: #ffffff;
+  width: 50px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 5px; /* 角の丸み */
+}
+.search:hover,
+button.last:hover,
+button.next:hover {
+  color: #ffffff;
+  background: #002b49;
+}
+
+.comment {
+  margin: 0; /* 上 右 下 左 */
+  padding: 2px 0 2px 2px;
+  width: 160px;
+  height: 100%;
+}
+.select {
+  margin: 5px 10px 5px 0; /* 上 右 下 左 */
+  padding: 3px;
+  width: 100px;
+  height: 100%;
+}
+
+.allcheck { /* すべてチェック */
+  margin: 5px 0 0 5px; /* 上 右 下 左 */
+  background: #ffffff;
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 7px; /* 角の丸み */
+  position: absolute;
+  right: 215px;
+  top: 5px;
+}
+.allcheck2 { /* すべてチェック */
+  margin: 5px 0 0 5px; /* 上 右 下 左 */
+  background: #ffffff;
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 7px; /* 角の丸み */
+  position: absolute;
+  right: 125px;
+  top: 5px;
+}
+.allcheck2:hover {
+  color: #ffffff;
+  background: #002b49;
+}
+
+.send_mail:hover {
+  color: #ffffff;
+  background: #002b49;
+}
+
+.OK { /* 確定ボタン */
+  color: #cb2c30;
+  background: #ffffff;
+  width: 70px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 7px; /* 角の丸み */
+  border-color: #cb2c30;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.OK:hover {
+  color: #ffffff;
+  background: #cb2c30;
+}

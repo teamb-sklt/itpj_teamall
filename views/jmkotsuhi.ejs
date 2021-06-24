@@ -1,198 +1,159 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head class= 'container p-3'>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' 
-    href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css' />
-    
-  <body class="body"> -->
-
-    <%- include("partials/header3") %>
-
-    <!-- 左上部分 -->
-    <div class="header">
-    <form method="POST" action="/jmkotsuhi">
-    <h1><%= title %> 交通費データ </h1>
-    <input type="hidden" name="hiddenmonth" value=<%= h3 %>>
-    <h3><%= h3 %></h3>
-    <input type="submit" id='previousmonth' value="先月データ" class="previousmonth" name='previousmonth'>
-    <input type="submit" id='nextmonth' value="次月データ" class="nextmonth" name='nextmonth'>
-    <div class="all">
-      <div class="form-group btn">
-        <input type="button" id="b1" value="経費" class="btn btn-primary b1" onclick="location.href='http://localhost:3000/jmkehi'">
-        <input type="button" id="b2" value="交通費" class="btn btn-primary b2" onclick="location.href='http://localhost:3000/jmkotsuhi'">
-      </div>
-
-      <!-- 右上部分 -->
-        <div class='list'>
-          <div class='form-group'>
-            <label>ステータス</label>
-            <select id='status' name='status' class='status form-control'>
-              <option>全て</option>
-              <option>未申請</option>
-              <option>JM申請中</option>
-              <option>経理申請中</option>
-              <option>承認</option>
-              <option>却下</option>
-            </select>
-          </div>
-          <div class='form-group'>
-            <label>社員</label>
-            <select id='employee' name='employee' class='employee form-control'>
-              <option>全て</option>
-              <option>aaaaaaa</option>
-              <option>bbb</option>
-              <option>ccc</option>
-            </select>
-          </div>
-          <div class='form-group'>
-            <label>ジョブコード/ジョブ名</label>
-            <select id='employee' name='employee' class='job form-control'>
-              <option>全て</option>
-              <option>aaaaaaaaaaaaaaa</option>
-              <option>bbb</option>
-              <option>ccc</option>
-            </select>
-          </div>
-          <div class='form-group'>
-            <label>期間</label>
-            <select id='employee' name='employee' class='span form-control'>
-              <option>全て</option>
-              <option>2021/06</option>
-              <option>2021/05</option>
-              <option>2021/04</option>
-            </select>
-          </div>
-        </div>
-          <input type="submit" id='narrowDown' value="絞り込む" class="btn btn-warning narrowDown" name='narrowDown'>
-    </div>
-    </form>
 
 
-  <table class="st-tbl1">
-  <!-- <table border="1"> -->
-    <!-- テーブルタイトル -->
-    <thead>
-      <colgroup>
-        <col class="col1" style='width:6.4%;'>
-        <col class="col2" style='width:4.2%;'>
-        <col class="col3" style='width:5%;'>
-        <col class="col4" style='width:5%;'>
-        <col class="col5" style='width:5%;'>
-        <col class="col6" style='width:5%;'>
-        <col class="col7" style='width:5%;'>
-        <col class="col8" style='width:5%;'>
-        <col class="col9" style='width:5%;'>
-        <col class="col10" style='width:5%;'>
-        <col class="col11" style='width:5%;'>
-        <col class="col12" style='width:2.8%;'>
-        <col class="col13" style='width:2.8%;'>
-        <col class="col14" style='width:39.2%;'>
-      </colgroup>
-    <tr align="center" >
-      <th rowspan="2">ステータス</th>
-      <th rowspan="2">RefNo</th>
-      <th rowspan="2">利用日</th>
-      <th rowspan="2">手段</th>
-      <th rowspan="2">From</th>
-      <th rowspan="2">To</th>
-      <th rowspan="2">回数</th>
-      <th rowspan="2">立替</th>
-      <th rowspan="2">JobC</th>
-      <th rowspan="2">単価</th>
-      <th rowspan="2">小計</th> 
-      <th colspan="4" class="syoninn">JM承認</th>
-    </tr>
-    <tr align="center" >
-      <th class="syoninn1">承認</th>
-      <th class="kyakka">却下</th>
-      <th class="comment">コメント入力</th>
-    </tr>
-    </thead>
-  </table>
-</div>
+<%- include('partials/header2') %>
 
-    <form method="POST" action="/jmkotsuhi" name='set'>
-    <div class="data">
+<nav class="navbar">
+  <ul class="top">
+    <li><a href="/jmkehi">経費</a></li>
+    <h3>交通費</h3>
+  </ul>
+</nav>
 
-    <!-- ここから下がセット -->
-    <table class="st-tbl2">
-      <tr> 
-        <th class="employeeT"><%= emp_no %></th>
-        <th class="jobT"><%= job_no %></th>
-        <th class="sumT">合計金額（DBより）</th>
-      </tr>
-    </table>
-
-    <!-- サンプル -->
-  <div class="div-tbl3">
-  <table class="st-tbl3">
-    <colgroup>
-      <col class="col1" style='width:6.4%;'>
-      <col class="col2" style='width:4.2%;'>
-      <col class="col3" style='width:5%;'>
-      <col class="col4" style='width:5%;'>
-      <col class="col5" style='width:5%;'>
-      <col class="col6" style='width:5%;'>
-      <col class="col7" style='width:5%;'>
-      <col class="col8" style='width:5%;'>
-      <col class="col9" style='width:5%;'>
-      <col class="col10" style='width:5%;'>
-      <col class="col11" style='width:5%;'>
-      <col class="col12" style='width:2.8%;'>
-      <col class="col13" style='width:2.8%;'>
-      <col class="col14" style='width:37.8%;'>
-    </colgroup>
-    <tbody>
-    <div class='tbody'>
-      <% for(let i in status) { %> 
-      <tr align="center" >
-      <td><%=status[i] %></td>
-      <td><%=ref_no[i] %></td>
-      <td><%=day[i] %></td>
-      <td><%=trans_type[i] %></td>
-      <td><%=trans_from[i] %></td>
-      <td><%=trans_to[i] %></td>
-      <td><%=count[i] %></td>
-      <td><input id="chkbox0" type="checkbox"/></td>
-      <td><input id="chkbox0" type="checkbox"/></td>
-      <td bgcolor="lightgrey"><%= amount[i] %></td>
-      <td bgcolor="lightgrey"><%= subtotal[i] %></td>
-      <td rowspan="2">
-        <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%= radioname[i] %> />
-      </td>
-      <td rowspan="2">
-        <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%= radioname[i] %> />
-      </td>
-      <td rowspan="2">
-        <input type="text" class='form-control'/>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="11" class="bikoran"><%=remarks %></td>
-    </tr>
-    <% } %>   
-
-  <!-- ここから上がセット -->
-  
-
-  
-
-</div>
-
-
-  
-
-  
-
-  <!-- 右下部分 -->
-  <div class="form-group btn1">
-    <input type="button" id="b4" name='b4' value="全て承認にチェック" class="btn btn-light b4" onClick="allcheck(set,1)">
-    <input type="button" id="b3" name='b3' value="全てのチェックを解除" class="btn btn-light b3" onClick="allcheckout(set)">
-    <input type="submit" id='confirm' value="確定" class="btn btn-warning confirm" name='confirm'>
+<form action="/jmkotsuhi" method="post"> <!-- 年月 -->
+  <input type="hidden" name="year" value="<%- year %>">
+  <input type="hidden" name="month" value="<%- nowmonth %>">
+  <input type="hidden" name="status" value="1=1">
+  <input type="hidden" name="employee" value="1=1">
+  <div class="date_box">
+    <button class="last" name="previousmonth" value="-1">◀</button>
+    <b><%- year %>年 <%- nowmonth %>月分</b>
+    <button class="next" name="nextmonth" value="+1">▶</button>
   </div>
 </form>
 
-<%- include("partials/footer") %>
+<form action="/jmkotsuhi" method="post">
+  <div class="search_box">
+    <input type="hidden" name="year" value="<%- year %>">
+    <input type="hidden" name="month" value="<%- nowmonth %>">
+    <div class="d">表示条件：ステータス</div>
+    <select name="status2" id="status2" class="select">
+      <option value="1=1">全て</option>
+      <option value="status='00'">未申請</option>
+      <option value="status='11'">JobM申請中</option>
+      <option value="status='19'">JobM却下</option>
+      <option value="status='21'">経理申請中</option>
+      <option value="status='29'">承認</option>
+      <option value="status='88'">却下</option>
+    </select>
+    <div class="d">社員</div>
+    <select name="employee" id="employee" class="select">
+      <option value="1=1">全て</option>
+      <% for(var i=0;i<shain.length;i++){ %> 
+        <option value="emp_no='<%- shain[i].emp_no %>'"><%- shain[i].emp_name %></option>
+        <% } %> 
+    </select>
+    <div class='form-group form-inline'>
+      <label>ジョブ</label>
+      <select name="job_no2" id="job_no2" class="select">
+        <option value="1=1">全て</option>
+        <% for(var i=0;i<job.length;i++){ %> 
+        <option value="job_no='<%- job[i].job_id %>'"><%- job[i].job_name %></option>
+        <% } %> 
+      </select>
+    </div>
+    <div class='form-group form-inline'>
+      <label>期間</label>
+      <input id="yyy1" name="yyy1" size="4" required placeholder="yyyy"><input id="m1" name="m1" size="2" required placeholder="m"><input id="d1" name="d1" size="2" required placeholder="dd">~
+      <input id="yyy2" name="yyy2" size="4" required placeholder="yyyy"><input id="m2" name="m2" size="2" required placeholder="m"><input id="d2" name="d2" size="2" required placeholder="dd">
+    </div> 
+  <input type="submit" name="display" value="表示" class="search">  
+  </div>
+</form>
+
+  <!-- テーブルタイトル -->
+<table>
+  <tr>
+    <th width="8%">ステータス</th>
+    <th width="3%">月</th>
+    <th width="3%">日</th>
+    <th width="9%">From</th>
+    <th width="9%">Via</th>
+    <th width="9%">To</th>
+    <th width="8%">交通手段</th>
+    <th width="4%">回数</th>
+    <th width="5%">立替</th>
+    <th width="5%">JobC</th>
+    <th width="5%">単価</th>
+    <th width="5%">小計</th>
+    <th width="5%">RefNo</th>
+    <th width="4%">承認</th>
+    <th width="4%">却下</th>
+    <th width="16%">コメント</th>
+  </tr>
+</table>
+
+<form method="POST" action="/jmkotsuhi" name='set'>
+    <!-- サブヘッダー -->
+    <% var jn; %> 
+    <% if(rireki[0]==null){ %>
+      <p>該当データはありません</p>
+    <% }else{ %> 
+      <% for(var i=0;i<shain.length;i++){ %> 
+        <p>社員名：<%- shain[i].emp_name %></p>
+        <% jn=0; %> 
+        <% for(var j=0;j<rireki.length;j++){ %>
+          <% if(rireki[j].emp_no===shain[i].emp_no&&rireki[j].job_no!==jn){ %>
+            <p><%- rireki[j].job_no %></p>
+            <p>合計金額<%- sum[j] %>円</p>
+            <% jn=rireki[j].job_no; %> 
+            <% for(var k=0;k<rireki.length;k++){ %>
+              <% if(shain[i].emp_no===rireki[k].emp_no&&rireki[k].job_no===rireki[j].job_no){ %>
+    
+    <!-- データテーブル -->
+      <table>
+        <tr>
+          <% if(rireki[k].status=="00"){ %>
+          <td width="100px" class="first" rowspan="2">未申請</td>
+          <% }else if(rireki[k].status=="11"){ %> 
+            <td width="100px" class="first" rowspan="2">JM申請中</td>
+          <% }else if(rireki[k].status=="19"){ %> 
+            <td width="100px" class="first" rowspan="2">JM却下</td>
+          <% }else if(rireki[k].status=="21"){ %>
+            <td width="100px" class="first" rowspan="2">経理申請中</td>
+          <% }else if(rireki[k].status=="29"){ %>
+            <td width="100px" class="first" rowspan="2">経理却下</td>
+          <% }else if(rireki[k].status=="88"){ %>  
+            <td width="100px" class="first" rowspan="2">承認</td>
+          <% } %> 
+          <td width="35px"><%-rireki[k].month %></td>
+          <td width="35px"><%-rireki[k].day %></td>
+          <td width="100px"><%-rireki[k].trans_from %></td>
+          <td width="100px"><%-rireki[k].trans_waypoint %></td>
+          <td width="100px"><%-rireki[k].trans_to %></td>
+          <td width="80px"><%-rireki[k].trans_type %></td>
+          <td width="50px"><%-rireki[k].count %></td>
+          <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+          <td width="50px"><input id="chkbox0" type="checkbox"/></td>
+          <td width="65px"><%- rireki[k].amount %></td>
+          <td width="65px"><%- rireki[k].amount*rireki[k].count %></td>
+          <td width="60px"><%- rireki[k].ref_no %></td>
+          <input type='hidden' name=<%- rireki[k].branch_no %>>
+          <input type="hidden" class='form-control' value="emp_no='<%- rireki[k].emp_no %>' and sheet_year='<%- rireki[k].sheet_year %>' and sheet_month='<%- rireki[k].sheet_month %>' and branch_no='<%- rireki[k].branch_no %>'" name="approve" />
+          <td width="40px" class="first" rowspan="2">
+            <input type="radio" class='form-control' value="1" onclick="radioDeselection(this, 1)" name=<%- rireki[k].radioname %> />
+          </td>
+          <td width="40px" class="first" rowspan="2">
+            <input type="radio" class='form-control' value="2" onclick="radioDeselection(this, 2)" name=<%- rireki[k].radioname %> />
+          </td>
+          <td width="16%" class="first" rowspan="2">
+            <input type="text" class='textsize'/>
+          </td>
+        </tr>
+        <tr>
+          <td class="comment" colspan="20"><%- rireki[k].remarks %></td>
+        </tr>
+      </table>
+      <% } %>  
+      <% } %> 
+      <% } %>  
+    <% } %>  
+    <% } %> 
+    <% } %> 
+    
+    <div class="box">
+        <input type="button" id="b4" name='b4' value="全て承認" class="allcheck" onClick="allcheck(set,1)">
+        <input type="button" id="b3" name='b3' value="全解除" class="allcheck2" onClick="allcheckout(set)">
+        <input type="submit" id='confirm' value="確定" class="OK" name='confirm'>
+      </div>
+    
+    <%- include('partials/footer2') %>
