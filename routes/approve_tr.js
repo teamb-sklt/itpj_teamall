@@ -260,48 +260,80 @@ router.post('/', async function(req, res, next) {
       password: dbpassword,
       port: 5432
     })
-    await client.connect()
-    console.log(client)
+    var app2;
+    var den2;
+
     //approve
-    if(req.body.approve.length===1){
-      var app=req.body.approve;
-      client.query("UPDATE TeDetail set status='88' where "+app, function(err, result){
-        if (err){
-          console.log(err) //show error infomation
+    if(req.body.approve!==undefined){
+      if(req.body.approve[0].length==1){
+        app2=req.body.approve;
+      }else if(req.body.approve.length>1){
+        var app=[];
+        for(let i in req.body.approve){
+          app.push(req.body.approve[i]);
         }
-      });
-    }else if(req.body.approve.length>1){
-      var app=[];
-      for(let i in req.body.approve){
-        app.push(req.body.approve[i]);
-        client.query("UPDATE TeDetail set status='88' where "+app[i], function(err, result){
-          if (err){
-            console.log(err) //show error infomation
-          }
-        });
+        app2=app.join(" or ");
       }
     }
+
     //deny
     if(req.body.deny!==undefined){
-      for(let i of req.body.deny){
-        client.query("UPDATE TeDetail set status='29' where "+req.body.deny[i], function(err, result){
-          if (err){
-            console.log(err) //show error infomation
-          }
-        });
-    
-      }  
+      if(req.body.deny[0].length===1){
+        den2=req.body.deny;
+      }else if(req.body.deny.length>1){
+        var den=[];
+        for(let i in req.body.deny){
+          den.push(req.body.deny[i]);
+        }
+        den2=den.join(" or ");
+      }
     }
-    //コメント(コメントテーブルにinsert,詳細テーブル備考をアップデート)
-    // for(var i;i<req.body.length;i++){
-    //   client.query("UPDATE ExDetail set status='88' where "+req.body.approve[i], function(err, result){
-    //     if (err){
-    //       console.log(err) //show error infomation
-    //     }
-    //   });
-  
-    // }
+    
+    //comment
+    var com2=[];
+    var com4=[];
+    for(let i=0;i<req.body.comment.length;i++){
+      if(req.body.comment[i]!==''){
+        var com="WHEN emp_no='"+req.body.emp_no[i]+"' AND sheet_year='"+req.body.year[i]+"' AND sheet_month='"+req.body.month[i]+"' AND branch_no='"+req.body.branch_no[i]+"' THEN CONCAT(comment,'/経理："+req.body.comment[i]+"')";
+        var com3="WHEN emp_no='"+req.body.emp_no[i]+"' AND sheet_year='"+req.body.year[i]+"' AND sheet_month='"+req.body.month[i]+"' AND branch_no='"+req.body.branch_no[i]+"' THEN '2'";
+        com2.push(com);
+        com4.push(com3);
+      }
+    }
+    var com5=com2.join(" ");
+    var com6=com4.join(" ");
 
+    await client.connect()
+    console.log(client);
+    console.log(app2);
+    console.log(den2);
+    console.log(com5);
+    console.log(com6);
+
+    if(app2){
+      var appup="UPDATE TeDetail set status='88' where "+app2+";";
+    }else{
+      var appup="";
+    }
+    if(den2){
+      var denup="UPDATE TeDetail set status='29' where "+den2+";";
+    }else{
+      var denup="";
+    }
+    if(com5){
+      var comup="UPDATE TeComments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
+    }else{
+      var comup="";
+    }
+
+    console.log(1);
+
+
+    client.query(appup+denup+comup, function(err, result){
+      if (err){
+        console.log(err) //show error infomation
+      }
+    });
     client.end();
     res.redirect('/approve_tr');
 
