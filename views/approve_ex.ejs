@@ -18,7 +18,7 @@
       <input type="hidden" name="employee" value="1=1">
       <div class="date_box">
         <button class="last" name="last" value="-1">◀</button>
-        <b><%- year %>年 <%- month %>月分</b>
+        <b><%- year %>年 <%- month-1 %>月~<%- month %>月分</b>
         <button class="next" name="next" value="+1">▶</button>
       </div>
     </form>
@@ -35,8 +35,8 @@
         <option value="status='11'">JobM申請中</option>
         <option value="status='19'">JobM却下</option>
         <option value="status='21'">経理申請中</option>
-        <option value="status='29'">承認</option>
-        <option value="status='88'">却下</option>
+        <option value="status='88'">承認</option>
+        <option value="status='29'">却下</option>
       </select>
       <div class="d">社員</div>
       <select name="employee" id="employee" class="select">

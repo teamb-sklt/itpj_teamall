@@ -48,7 +48,7 @@ router.get('/', async function(req, res, next) {
         rejectUnauthorized: false
     }
   }) : new Client({
-    user: 'postgres',
+    user: user,
     host: 'localhost',
     database: 'itpjph3',
     password: dbpassword,
@@ -107,7 +107,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -164,7 +164,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -221,7 +221,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -270,7 +270,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -327,17 +327,17 @@ router.post('/', async function(req, res, next) {
     console.log(com6);
 
     if(app2){
-      var appup="UPDATE exDetail set status='88' where "+app2+";"+" UPDATE exComments set app_class='2',app_flag='1' where "+app2+";" ;
+      var appup="UPDATE ExDetail set status='88' where "+app2+";";
     }else{
       var appup="";
     }
     if(den2){
-      var denup="UPDATE exDetail set status='29' where "+den2+";"+" UPDATE exComments set app_class='2',app_flag='2' where "+den2+";" ;
+      var denup="UPDATE ExDetail set status='29' where "+den2+";";
     }else{
       var denup="";
     }
     if(com5){
-      var comup="UPDATE excomments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
+      var comup="UPDATE ExComments SET comment=CASE "+com5+" ELSE comment END, app_class=CASE "+com6+" ELSE app_class END, app_flag=CASE "+com6+" ELSE app_flag END";
     }else{
       var comup="";
     }

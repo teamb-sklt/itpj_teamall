@@ -5,6 +5,7 @@ var {Client}=require('pg');
 require('dotenv').config();
 const user=process.env.USER;
 const dbpassword=process.env.PASSWORD;
+const nodemailer = require('nodemailer');
 
 var today=new Date();
 var year=today.getFullYear();
@@ -31,7 +32,7 @@ router.get('/', async function(req, res, next) {
         rejectUnauthorized: false
     }
   }) : new Client({
-    user: 'postgres',
+    user: user,
     host: 'localhost',
     database: 'itpjph3',
     password: dbpassword,
@@ -90,7 +91,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -150,7 +151,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -207,7 +208,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -256,7 +257,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -275,8 +276,45 @@ router.post('/', async function(req, res, next) {
         for(let i in req.body.approve){
           app.push(req.body.approve[i]);
         }
-        app2=app.join(" or ");
-        //console.log(app);
+        /* app2=app.join(" or ");
+        //console.log(app2);
+        var arr = app2.split(" or ");
+        for(i=0; i < arr.length; i++){
+        console.log(arr[i]); */
+      
+        
+        var receiverEmailAddress =  'mizuki.3612@gmail.com' //（鶴浜私用アドレス）
+        var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
+        var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
+      
+        //SMTPサーバの基本情報設定
+        var transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true, // SSL
+          auth: {
+            user: senderEmailAddress,
+            pass: senderEmailPassword
+          }
+        });
+      
+        //メール情報の作成
+        var mailOptions1 = {
+          from: senderEmailAddress,
+          to: receiverEmailAddress,
+          subject: '【EX WEB】承認のお知らせ',　//件名
+          text: '経費申請項目の中に承認されたものがあります。内容をご確認ください。'　//本文
+        };
+      
+      　//メール情報の作成
+        transporter.sendMail(mailOptions1, function (error, info) {
+          if (error) {
+            console.log('失敗');
+    
+          } else {
+            console.log('成功'); 
+          }
+        });  
       }
     }
 
@@ -284,7 +322,7 @@ router.post('/', async function(req, res, next) {
     if(req.body.deny!==undefined){
       if(req.body.deny[0].length===1){
         den2=req.body.deny;
-        //console.log(den2); //(emp_no='003' and sheet_year='2021' and sheet_month='07' and branch_no='11')
+        //console.log(den2); 
       }else if(req.body.deny.length>1){
         var den=[];
         for(let i in req.body.deny){
@@ -292,8 +330,41 @@ router.post('/', async function(req, res, next) {
         }
         den2=den.join(" or ");
         //console.log(den);
+    
+    var receiverEmailAddress =  'mizuki.3612@gmail.com' //（鶴浜私用アドレス）
+    var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
+    var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
+  
+    //SMTPサーバの基本情報設定
+    var transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // SSL
+      auth: {
+        user: senderEmailAddress,
+        pass: senderEmailPassword
       }
-    }
+    });
+  
+    //メール情報の作成
+    var mailOptions1 = {
+      from: senderEmailAddress,
+      to: receiverEmailAddress,
+      subject: '【EX WEB】却下のお知らせ',　//件名
+      text: '経費申請項目の中に却下されたものがあります。内容をご確認ください。'　//本文
+    };
+  
+  　//メール情報の作成
+    transporter.sendMail(mailOptions1, function (error, info) {
+      if (error) {
+        console.log('失敗');
+
+      } else {
+        console.log('成功'); 
+      }
+    });  
+  }
+}
     
     //comment
     var com2=[];
@@ -315,14 +386,14 @@ router.post('/', async function(req, res, next) {
     //console.log(den2);
     //console.log(com5);
     //console.log(com6);
-
+    
     if(app2){
-      var appup="UPDATE TeDetail set status='88' where "+app2+";"+" UPDATE TeComments set app_class='2',app_flag='1' where "+app2+";" ;
+      var appup="UPDATE TeDetail set status='88' where "+app2+";"+" UPDATE TeComment set app_class='2',app_flag='1' where "+app2+";" ;
     }else{
       var appup="";
     }
     if(den2){
-      var denup="UPDATE TeDetail set status='29' where "+den2+";"+" UPDATE TeComments set app_class='2',app_flag='2' where "+den2+";" ;
+      var denup="UPDATE TeDetail set status='29' where "+den2+";"+" UPDATE TeComment set app_class='2',app_flag='2' where "+den2+";" ;
     }else{
       var denup="";
     }
@@ -335,43 +406,20 @@ router.post('/', async function(req, res, next) {
     //console.log(1);
     //console.log(appup+denup+comup);
 
- /*  //addressのままなら配列？
-  var address = [req.body.approve];
+  //承認1人宛のメール送信
+/*   var address = [req.body.approve];
   var string_app= String(address);
-  //console.log(string_app);
-
-  //多分文字列にする必要あり
   var approve_no1 =string_app.substr( 1, 12 );
-    //console.log(approve_no1);
+    console.log(approve_no1);
 
   client.query("SELECT * from Employee where "+approve_no1+"",function (err, result){
     if (err){
       console.log(err) //show error infomation
     }
-    for(let i = 0; i <= result.rows; i++){
-      address.push(result.rows[i])
-      console.log(address);
- } 
-}); */
+    let address = result.rows[0].emp_mail
+    console.log(address);
     
-    
-/*     var str = app2;
-    str.split('').forEach( function( value ) {
-    console.log( value );
-  }); */
-   
-
-    /* var string_app= String(app2);
-    console.log(string_app);
-    var string_deny= String(den2);
-    console.log(string_deny);
-
-    var approve_no1 =string_app.substr( 8, 5 );
-    console.log(approve_no1);
-    var approve_no2 =string_deny.substr( 8, 5 );
-    console.log(approve_no2); */
-
-    /* var receiverEmailAddress = 'mizuki.3612@gmail.com' //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
+    var receiverEmailAddress =  address // mizuki.3612@gmail.com （佐藤保奈美を選択してください）
     var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
     var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
   
@@ -390,8 +438,8 @@ router.post('/', async function(req, res, next) {
     var mailOptions1 = {
       from: senderEmailAddress,
       to: receiverEmailAddress,
-      subject: '【経費申請】未申請のデータがあります',　//件名
-      text: string　//本文
+      subject: '【EX WEB】承認のお知らせ',　//件名
+      text: '経費申請項目の中に承認されたものがあります。内容をご確認ください。'　//本文
     };
   
   　//メール情報の作成
@@ -400,21 +448,24 @@ router.post('/', async function(req, res, next) {
         console.log('失敗');
 
       } else {
-        console.log('成功'); */
+        console.log('成功'); 
         
-      //res.redirect('/apprpve_tr'); 
+      res.redirect('/approve_tr'); 
+      }
+    }); 
+    });
+  }
+}); */
 
      client.query(appup+denup+comup, function(err, result){
       if (err){
         //console.log(err) //show error infomation
       }
     });
+    console.log(comup);
     client.end();
-    res.redirect('/approve_tr'); 
-  };
-});
-/* } */
-/* }); */
-
+    res.redirect('/approve_tr');   
+  }
+  });
 
 module.exports = router;

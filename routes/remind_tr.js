@@ -26,7 +26,7 @@ router.get('/', async function(req, res, next) {
         rejectUnauthorized: false
     }
   }) : new Client({
-    user: 'postgres',
+    user: user,
     host: 'localhost',
     database: 'itpjph3',
     password: dbpassword,
@@ -87,7 +87,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -144,7 +144,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -201,7 +201,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -250,7 +250,7 @@ router.post('/', async function(req, res, next) {
           rejectUnauthorized: false
       }
     }) : new Client({
-      user: 'postgres',
+      user: user,
       host: 'localhost',
       database: 'itpjph3',
       password: dbpassword,
@@ -287,6 +287,7 @@ router.post('/', async function(req, res, next) {
       month:tmonth  
     }
     res.render('remind_tr', opt);  
+    console.log(opt);
     });
     });
   }
@@ -300,7 +301,7 @@ router.post('/post', async (req, res, next)=>{
   var string= String(text);
   console.log(string);
 
-  var receiverEmailAddress = address //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
+  var receiverEmailAddress =  address //ここは自分のメールアドレスにしてください。じゃないと僕に大量にメールが届くので・・・
   var senderEmailAddress = 'test.itpj@gmail.com' //テスト用のアカウント（変更しないでください）
   var senderEmailPassword = 'ogrsnpgudnugutav'　//テスト用のアカウントのアプリPW（変更しないでください）
 
@@ -327,13 +328,21 @@ router.post('/post', async (req, res, next)=>{
   transporter.sendMail(mailOptions1, function (error, info) {
     if (error) {
       console.log('失敗');
-      //alert('送信に失敗しました');   
+      //let opt = 'もう一度やり直してください'
+
     } else {
       console.log('成功');
-      //alert('送信が完了しました');
-    }
+      
     res.redirect('/remind_tr'); 
-  });  
+
+/*   let opt = {
+    success:'メールが正常に送信されました',
+  }
+console.log(opt); 
+    res.render('/remind_tr', opt );
+ */
+  }
 });
+});  
 
 module.exports = router;
